@@ -14,7 +14,13 @@ public:
     }
     
     int get(int index, int snap_id) {
-        auto it = mp[index].upper_bound(snap_id);
+        //if(mp[index].empty() || snap_id < mp[index].begin()->first)return 0;
+        auto it = mp[index].lower_bound(snap_id);
+        if(!mp[index].empty() and it == mp[index].end()){
+            it--;
+            return it->second;
+        }
+        if(it->first==snap_id) return it->second;
         return it == begin(mp[index]) ? 0 : (--it)->second;
     }
 };
