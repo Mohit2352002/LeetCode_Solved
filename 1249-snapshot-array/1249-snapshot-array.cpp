@@ -1,6 +1,6 @@
 class SnapshotArray {
     int count=0;
-    unordered_map<int,map<int,int>>mp;
+    unordered_map<int,map<int,int>>mp; // index->{snap_id->val}
 public:
     SnapshotArray(int length) {
     }
@@ -14,8 +14,8 @@ public:
     }
     
     int get(int index, int snap_id) {
-  auto it = mp[index].upper_bound(snap_id);
-  return it == begin(mp[index]) ? 0 : prev(it)->second;
+        auto it = mp[index].upper_bound(snap_id);
+        return it == begin(mp[index]) ? 0 : (--it)->second;
     }
 };
 
