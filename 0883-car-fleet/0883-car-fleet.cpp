@@ -7,6 +7,7 @@ public:
         std::cin.tie(nullptr);
 
         int n=position.size();
+        if(n==1) return 1;
         vector<pair<int,int>>car;
 
         for(int i=0;i<n;++i){
