@@ -1,20 +1,26 @@
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
-        priority_queue<vector<int>>pq;
-        for(auto el:points){
-            int dist=(el[0]*el[0])+(el[1]*el[1]);
-            pq.push({dist,el[0],el[1]});
-            while(pq.size()>k) pq.pop();
+
+        priority_queue<pair<float,int>> minHeap;
+        vector<vector<int>> result;
+
+        for(int i = 0; i < points.size(); ++i){
+            float distance = sqrt((points[i][0] * points[i][0]) + (points[i][1] * points[i][1]));
+            minHeap.push(make_pair(distance,i));
+            if(minHeap.size() > k)
+                minHeap.pop();
         }
-        vector<vector<int>>ans;
-        while(!pq.empty()){
-            ans.push_back({pq.top()[1],pq.top()[2]});
-            pq.pop();
+
+        while(k--){
+            result.push_back(points[minHeap.top().second]);
+            minHeap.pop();
         }
-        return ans;
+
+        return result;
     }
 };
