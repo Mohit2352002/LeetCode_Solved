@@ -1,12 +1,9 @@
-static auto _ = [](){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return nullptr;
-}();
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         if(tasks.size()==1) return 1;
         if(n==0) return tasks.size();
         int freq[26]={}, maxf=0;
