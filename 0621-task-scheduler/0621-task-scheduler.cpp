@@ -1,3 +1,68 @@
+typedef priority_queue <int, vector<int> > min_heap;
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
+
+        if(tasks.size()==1) return 1;
+        if(n==0) return tasks.size();
+
+        min_heap pq = findFrequency(tasks);
+        vector<pair<int, int>> q;
+
+        int time = 0;
+        while (!pq.empty() || !q.empty()) 
+        {
+            time += 1;
+            // From max heap to queue
+            if (!pq.empty()) {
+                // Remove one unit in frequency
+                int top = pq.top() - 1;
+                pq.pop();
+                if (top) {
+                    // This task is waiting until waiting time reached
+                    q.push_back(make_pair(top, time + n));
+                }
+            }
+
+            // From queue to max heap
+            if (!q.empty()) {
+                pair<int, int> front = q.front();
+                if (front.second <= time) {
+                    pq.push(front.first);
+                    q.erase(q.begin());
+                }
+            }
+        }
+
+        return time;
+    }
+
+    min_heap findFrequency(vector<char>& tasks){
+        map<char, int> count;
+        for (char& task: tasks) {
+            if (count.find(task) == count.end()) count[task] = 1;
+            else count[task] += 1;
+        }
+        min_heap pq;
+        for (auto& key: count){
+            pq.push(key.second);
+        }
+        return pq;
+    }
+};
+
+
+
+
+
+
+
+/*
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
@@ -8,7 +73,7 @@ public:
 
         if(tasks.size()==1) return 1;
         if(n==0) return tasks.size();
-        
+
         priority_queue<int> pq;
         vector<int>mp(26,0);
 
@@ -44,6 +109,7 @@ public:
         return time;
     }
 };
+*/
 
 
 
