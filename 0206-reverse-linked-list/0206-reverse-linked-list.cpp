@@ -1,17 +1,24 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
+
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         cout.tie(nullptr);
-        if(!head or !head->next) return head;
-        ListNode *nextNode, *prevNode = NULL;
-        while (head) {
-            nextNode = head->next;
-            head->next = prevNode;
-            prevNode = head;
-            head = nextNode;
+
+         if(!head or !head->next)
+            return head;
+        
+        ListNode* prev = NULL ;
+        ListNode* forw = NULL ;
+        
+        while(head){
+            forw = head->next ;
+            head->next = prev ;
+            prev = head ;
+            head = forw ;
         }
-        return prevNode;
+    
+        return prev;
     }
 };
