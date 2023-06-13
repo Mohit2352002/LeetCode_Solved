@@ -1,6 +1,12 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
+        int t_sz=tasks.size();
+        if(t_sz==1) return 1;
+        if(n==0) return tasks.size();
         unordered_map<char, int> counts;
         for(char t: tasks) 
             counts[t]++;
@@ -49,7 +55,7 @@ public:
         int t_sz=tasks.size();
 
         if(t_sz==1) return 1;
-        if(n==0) return tasks.size();
+        if(n==0) return t_sz;
 
         int freq[26]={}, maxf=0;
 
