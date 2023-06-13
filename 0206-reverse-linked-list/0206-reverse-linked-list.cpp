@@ -4,6 +4,7 @@ public:
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         cout.tie(nullptr);
+        if(!head or !head->next) return head;
         ListNode *nextNode, *prevNode = NULL;
         while (head) {
             nextNode = head->next;
