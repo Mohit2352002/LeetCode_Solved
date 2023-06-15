@@ -12,6 +12,7 @@
 class Solution {
     int prev=-1,ans=INT_MAX;
 public:
+//inorder traversal gives sorted output in BST, left->root->right
     int minDiffInBST(TreeNode* root) {
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
