@@ -8,6 +8,7 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+/*
 class Solution {
 public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {
@@ -41,6 +42,7 @@ public:
         }
     }
 };
+*/
 
 
 
@@ -84,10 +86,12 @@ ListNode *mergeKLists(vector<ListNode *> &lists) { //priority_queue
 
 
 
-/*
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
         if (lists.empty()) {
             return nullptr;
         }
@@ -127,4 +131,3 @@ public:
         return dummy->next;
     }
 };
-*/
