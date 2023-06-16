@@ -1,3 +1,9 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
 class MedianFinder {
     priority_queue<int>max_heap;
     priority_queue<int,vector<int>,greater<int>>min_heap;
