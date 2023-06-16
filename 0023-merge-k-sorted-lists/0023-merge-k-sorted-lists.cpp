@@ -8,7 +8,12 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+
+
+
 /*
+//worst approach
 class Solution {
 public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {
@@ -48,15 +53,15 @@ public:
 
 
 
-
-
+/*
+//priority queue based approach
 //either of the two class cmp or function<bool(ListNode* , ListNode*)>
-/*class comp {
-    public:
-    bool operator()(const ListNode* l, const ListNode* r) {
-        return l->val > r->val;
-    }
-};*/
+// class comp {
+//     public:
+//     bool operator()(const ListNode* l, const ListNode* r) {
+//         return l->val > r->val;
+//     }
+// };
 class Solution{
     static bool comp(ListNode* a, ListNode* b){
         return a->val>b->val;
@@ -87,6 +92,7 @@ class Solution{
         return dummyHead->next;
     }
 };
+*/
 
 
 
@@ -94,37 +100,53 @@ class Solution{
 
 
 
-/*
+
+
+//Divide & Conquer
+//best most optimised approach
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
+
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
+
         if (lists.empty()) {
-            return nullptr;
+            return NULL;
         }
+
         return mergeKListsHelper(lists, 0, lists.size() - 1);
     }
     
+private:
     ListNode* mergeKListsHelper(vector<ListNode*>& lists, int start, int end) {
+
+        if(start>end) return NULL;
+
         if (start == end) {
             return lists[start];
         }
+
         if (start + 1 == end) {
             return merge(lists[start], lists[end]);
         }
+
         int mid = start + (end - start) / 2;
+
         ListNode* left = mergeKListsHelper(lists, start, mid);
         ListNode* right = mergeKListsHelper(lists, mid + 1, end);
+
         return merge(left, right);
     }
     
     ListNode* merge(ListNode* l1, ListNode* l2) {
+
         ListNode* dummy = new ListNode(0);
         ListNode* curr = dummy;
         
         while (l1 && l2) {
+
             if (l1->val < l2->val) {
                 curr->next = l1;
                 l1 = l1->next;
@@ -132,6 +154,7 @@ public:
                 curr->next = l2;
                 l2 = l2->next;
             }
+
             curr = curr->next;
         }
         
@@ -140,4 +163,3 @@ public:
         return dummy->next;
     }
 };
-*/
