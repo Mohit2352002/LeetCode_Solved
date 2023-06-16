@@ -78,6 +78,33 @@ ListNode *mergeKLists(vector<ListNode *> &lists) { //priority_queue
 }
 */
 
+class Solution{
+    static bool comp(ListNode* a, ListNode* b){
+        return a->val>b->val;
+    }
+    public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
+        if (lists.empty()) {
+            return NULL;
+        }
+        priority_queue<ListNode*, vector<ListNode*>, function<bool(ListNode* , ListNode*)>> pq(comp);
+        for(auto head:lists){
+            if(head) pq.push(head);
+        }
+        ListNode*dummyHead=new ListNode(-1);
+        ListNode*dummyTail=dummyHead;
+        while(!pq.empty()){
+            dummyTail->next=pq.top();
+            pq.pop();
+            dummyTail=dummyTail->next;
+            if(dummyTail->next!=NULL) pq.push(dummyTail->next);
+        }
+        return dummyHead->next;
+    }
+};
 
 
 
@@ -85,7 +112,7 @@ ListNode *mergeKLists(vector<ListNode *> &lists) { //priority_queue
 
 
 
-
+/*
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
@@ -131,3 +158,4 @@ public:
         return dummy->next;
     }
 };
+*/
