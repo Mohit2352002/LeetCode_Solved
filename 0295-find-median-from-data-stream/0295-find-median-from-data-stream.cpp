@@ -5,26 +5,63 @@ static auto _ = [](){
     return nullptr;
 }();
 class MedianFinder {
+    priority_queue <int, vector<int>, greater<>> right;
+    priority_queue <int> left;
+    int median;
+    unsigned short lcount, rcount;
+
+    
 public:
-    priority_queue<int>left;
-    priority_queue<int,vector<int>,greater<int>>right;
     MedianFinder() {
-        
+        median = -2147483648;
+        lcount = 0;
+        rcount = 0;
     }
     
-    void addNum(int num) {
-        if(!left.empty() and num<left.top())  left.push(num);
-        else    right.push(num);
-        if(left.size()==right.size()+2)   right.push(left.top()), left.pop();
-        else if(right.size()==left.size()+2)    left.push(right.top()), right.pop();
+    void addNum(int num) {  
+        if(median==-2147483648){
+            median=num; 
+            return; 
+        }   
+        if(num<median){
+            left.push(num);
+            if(lcount>rcount){
+                right.push(median);
+                median = left.top();
+                left.pop();
+                rcount++;
+            }
+            else
+                lcount++;
+        }
+        else{
+            right.push(num);
+            if(rcount>lcount){
+                left.push(median);
+                median = right.top();
+                right.pop();
+                lcount++;
+            }
+            else
+                rcount++;
+        }
     }
     
     double findMedian() {
-        if(left.size()>right.size())    return left.top();
-        if(right.size()>left.size())    return right.top();
-        return (double)(left.top()+right.top())/2;
+        if(lcount==rcount)
+            return median;
+        else if(lcount>rcount){
+            double sum = median+left.top();
+            return sum/2;
+        }
+        else{
+            double sum = median+right.top();
+            return sum/2;
+        }
     }
 };
+
+
 
 
 
@@ -80,9 +117,56 @@ public:
 };
 */
 
+
+
+
+
+
+
+
+
+
+
+/*
+//wo using a variable median
+class MedianFinder {
+public:
+    priority_queue<int>left;
+    priority_queue<int,vector<int>,greater<int>>right;
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        if(!left.empty() and num<left.top())  left.push(num);
+        else    right.push(num);
+        if(left.size()==right.size()+2)   right.push(left.top()), left.pop();
+        else if(right.size()==left.size()+2)    left.push(right.top()), right.pop();
+    }
+    
+    double findMedian() {
+        if(left.size()>right.size())    return left.top();
+        if(right.size()>left.size())    return right.top();
+        return (double)(left.top()+right.top())/2;
+    }
+};
+*/
+
+
+
+
+
+
+
+
+
 /**
  * Your MedianFinder object will be instantiated and called as such:
  * MedianFinder* obj = new MedianFinder();
  * obj->addNum(num);
  * double param_2 = obj->findMedian();
  */
+
+
+
+
