@@ -5,6 +5,37 @@ static auto _ = [](){
     return nullptr;
 }();
 class MedianFinder {
+public:
+    priority_queue<int>left;
+    priority_queue<int,vector<int>,greater<int>>right;
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        if(!left.empty() and num<left.top())  left.push(num);
+        else    right.push(num);
+        if(left.size()==right.size()+2)   right.push(left.top()), left.pop();
+        else if(right.size()==left.size()+2)    left.push(right.top()), right.pop();
+    }
+    
+    double findMedian() {
+        if(left.size()>right.size())    return left.top();
+        if(right.size()>left.size())    return right.top();
+        return (double)(left.top()+right.top())/2;
+    }
+};
+
+
+
+
+
+
+
+
+
+/*
+class MedianFinder {
     priority_queue<int>max_heap;
     priority_queue<int,vector<int>,greater<int>>min_heap;
     int median=INT_MAX;
@@ -47,6 +78,7 @@ public:
         return median;
     }
 };
+*/
 
 /**
  * Your MedianFinder object will be instantiated and called as such:
