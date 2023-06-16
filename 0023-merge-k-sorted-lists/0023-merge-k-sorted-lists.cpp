@@ -50,34 +50,13 @@ public:
 
 
 
-
-/*
-struct compare {
+//either of the two class cmp or function<bool(ListNode* , ListNode*)>
+/*class comp {
+    public:
     bool operator()(const ListNode* l, const ListNode* r) {
         return l->val > r->val;
     }
-};
-ListNode *mergeKLists(vector<ListNode *> &lists) { //priority_queue
-    priority_queue<ListNode *, vector<ListNode *>, compare> q;
-    for(auto l : lists) {
-        if(l)  q.push(l);
-    }
-    if(q.empty())  return NULL;
-
-    ListNode* result = q.top();
-    q.pop();
-    if(result->next) q.push(result->next);
-    ListNode* tail = result;            
-    while(!q.empty()) {
-        tail->next = q.top();
-        q.pop();
-        tail = tail->next;
-        if(tail->next) q.push(tail->next);
-    }
-    return result;
-}
-*/
-
+};*/
 class Solution{
     static bool comp(ListNode* a, ListNode* b){
         return a->val>b->val;
@@ -91,9 +70,12 @@ class Solution{
             return NULL;
         }
         priority_queue<ListNode*, vector<ListNode*>, function<bool(ListNode* , ListNode*)>> pq(comp);
+        //if using class comp, then use below
+        //priority_queue<ListNode*, vector<ListNode*>, comp> pq;
         for(auto head:lists){
             if(head) pq.push(head);
         }
+        if(pq.empty())  return NULL;
         ListNode*dummyHead=new ListNode(-1);
         ListNode*dummyTail=dummyHead;
         while(!pq.empty()){
