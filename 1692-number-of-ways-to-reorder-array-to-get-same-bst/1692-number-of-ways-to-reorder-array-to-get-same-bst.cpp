@@ -1,34 +1,54 @@
 class Solution {
+
+  typedef long long ll;
+  ll MOD=1e9 + 7;
+
+  vector<vector<ll>>PT; //Pascal Triangle to find ncr value
+
+  ll solve(vector<int>&nums){
+
+    if(nums.size()<3) return 1;
+
+    vector<int>left_arr,right_arr;
+
+    int root=nums[0];
+    int n=nums.size();
+
+    for(int i=1;i<n;++i){
+      if(nums[i]>root) right_arr.push_back(nums[i]);
+      else left_arr.push_back(nums[i]);
+    }
+
+    ll left_solve=solve(left_arr);
+    ll right_solve=solve(right_arr);
+
+    ll perm=PT[n-1][left_arr.size()]%MOD; // (n-1)c(r) 
+    //possible combinations after fixing root and maintaing relative ordering of left and right arrays.
+    
+    return (perm*((right_solve*left_solve)%MOD))%MOD;
+  }
+
 public:
-int numOfWays(vector<int>& nums) {
-long long mod = 1e9 + 7;
-int n = nums.size();
-table.resize(n + 1);
-for(int i = 0; i < n + 1; ++i){
-table[i] = vector<long long>(i + 1, 1);
-for(int j = 1; j < i; ++j){
-table[i][j] = (table[i-1][j-1] + table[i-1][j]) % mod;
-}
-}
-long long ans = dfs(nums, mod);
-return (ans % mod - 1)%mod;
-}
-private:
-vector<vector<long long>> table;
-long long dfs(vector<int> &nums, long long mod){
-int n = nums.size();
-if(n <= 2) return 1;
-// find left sub-sequence elements and right sub-sequence elements
-vector<int> left, right;
-for(int i = 1; i < nums.size(); ++i){
-if(nums[i] < nums[0]) left.push_back(nums[i]);
-else right.push_back(nums[i]);
-}
-// recursion with left subtree and right subtree
-long long left_res = dfs(left, mod) % mod;
-long long right_res = dfs(right, mod) % mod;
-// look up table and multiple them together
-int left_len = left.size(), right_len = right.size();
-return (((table[n - 1][left_len] * left_res) % mod) * right_res) % mod;
-}
+  int numOfWays(vector<int>& nums) {
+
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
+    int n=nums.size();
+
+    PT.resize(n+1);
+    
+    //Populating Pascal's Triangle
+    PT[0]={1};
+    PT[1]={1,1};
+    for(int i=2;i<=n;++i){
+      PT[i]=vector<ll>(i+1,1);
+      for(int j=1; j<i;++j){
+        PT[i][j]=(PT[i-1][j]+PT[i-1][j-1])%MOD; // ncr = (n-1)c(r) + (n-1)c(r-1);
+      }
+    }
+
+    return solve(nums)-1;
+  }
 };
