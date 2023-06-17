@@ -1,19 +1,17 @@
 class Solution {
     map<pair<int,int>,int>mp;
     int solve(int idx, vector<int>& arr1, vector<int>& arr2, int prev){
+        if(idx==arr1.size()) return 0;
         if(mp.find({idx,prev})!=mp.end()) return mp[{idx,prev}];
-        if(idx>=arr1.size()) return 0;
-        int ans1=1e9+1;
+        int ans=1e9+1;
         if(arr1[idx]>prev){
-            ans1=solve(idx+1,arr1,arr2,arr1[idx]); //no operation 
+            ans=min(ans,solve(idx+1,arr1,arr2,arr1[idx])); //no operation 
         }
-        int ans2=1e9+1;
-        auto it=upper_bound(arr2.begin(),arr2.end(),prev);
-        if(it!=arr2.end()){
-            int j=it-arr2.begin();
-            ans2=1+solve(idx+1,arr1,arr2,arr2[j]);
+        int it=upper_bound(arr2.begin(),arr2.end(),prev)-arr2.begin();
+        if(it<arr2.size()){
+            ans=min(ans,1+solve(idx+1,arr1,arr2,arr2[it]));
         }
-        return mp[{idx,prev}]=min(ans1,ans2);
+        return mp[{idx,prev}]=ans;
     }
 public:
     int makeArrayIncreasing(vector<int>& arr1, vector<int>& arr2) {
