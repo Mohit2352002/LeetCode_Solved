@@ -13,9 +13,9 @@ public:
         ios::sync_with_stdio(false);
         cin.tie(nullptr);
         cout.tie(nullptr);
-        if(head==NULL || !head->next or !head->next->next) return false;
-        ListNode *slow=head->next;
-        ListNode *fast=head->next->next;
+        if(head==NULL || !head->next) return false;
+        ListNode *slow=head;
+        ListNode *fast=head->next;
         while(slow!=fast){
             if(fast==NULL||fast->next==NULL){
                 return false;
