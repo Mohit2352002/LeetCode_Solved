@@ -1,3 +1,4 @@
+/*
 class Solution {
 
   typedef long long ll;
@@ -52,6 +53,7 @@ public:
     return solve(nums)-1;
   }
 };
+*/
 
 
 
@@ -62,7 +64,6 @@ public:
 
 
 
-/*
 class Solution {
 public:
     const int mod = 1e9 + 7;
@@ -86,7 +87,9 @@ public:
         return res * dfs(left) % mod * dfs(right) % mod;
     }
     int numOfWays(vector<int>& nums) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         return dfs(nums) - 1;
     }
 };
-*/
