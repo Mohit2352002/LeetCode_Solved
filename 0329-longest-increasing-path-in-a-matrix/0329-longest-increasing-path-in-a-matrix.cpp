@@ -15,7 +15,6 @@ class Solution {
                 res=max(1+dfs(nx,ny,matrix),res);
             }
         }
-        ans=max(ans,res);
         return dp[x][y]=res;
     }
 public:
