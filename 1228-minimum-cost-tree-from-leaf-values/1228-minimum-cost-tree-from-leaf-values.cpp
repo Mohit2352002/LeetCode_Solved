@@ -31,6 +31,46 @@ public:
 
 
 
+/*
+class Solution {
+public:
+
+    static const int nm = 42;
+    static const int inf = 1e9;
+
+    int f[nm][nm];
+    int amax[nm][nm];
+
+    int mctFromLeafValues(vector<int>& arr) {
+        int n = arr.size();
+        for (int i = 0; i < n; ++i) {
+            amax[i][i] = arr[i];
+            for (int j = i + 1; j < n; ++j) amax[i][j] = max(amax[i][j - 1], arr[j]);
+        }
+
+        for (int l = 2; l <= n; ++l) {
+            for (int i = 0; i + l - 1 < n; ++i) {
+                int j = i + l - 1;
+                f[i][j] = inf;
+                for (int k = i; k < j; ++k) {
+                    f[i][j] = min(f[i][j], f[i][k] + f[k + 1][j] + amax[i][k] * amax[k + 1][j]);
+                }
+            }
+        }
+        return f[0][n - 1];
+    }
+};*/
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
