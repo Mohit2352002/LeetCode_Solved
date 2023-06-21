@@ -13,22 +13,27 @@ public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
-        std::cin.tie(nullptr);
+        std::cin.tie(nullptr); 
+
         if(!head) return NULL;
         if(!head->next and n==1) return NULL;
-        ListNode *dummy=new ListNode(-1);
-        dummy->next=head;
-        ListNode* fast=dummy, *slow=dummy;
-        //dummy->next=head;
-        while(n-- and fast->next!=NULL){
+        
+        ListNode *temp = new ListNode();
+        temp->next = head;
+
+        ListNode * fast = temp;
+        ListNode *slow = temp;
+
+        for(int i=0;i<n;i++){
             fast=fast->next;
         }
         while(fast->next!=NULL){
-            fast=fast->next;
-            slow=slow->next;
+            slow = slow->next;
+            fast = fast->next;
         }
-        slow->next=slow->next->next;
-        return dummy->next;
+
+        slow->next = slow->next->next;
+        return temp->next;
     }
 };
 
