@@ -15,9 +15,6 @@ public:
         std::cout.tie(nullptr);
         std::cin.tie(nullptr); 
 
-        if(!head) return NULL;
-        if(!head->next and n==1) return NULL;
-        
         ListNode *temp = new ListNode();
         temp->next = head;
 
