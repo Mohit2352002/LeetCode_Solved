@@ -16,9 +16,9 @@ public:
         int i=0,median;
         long long idx=0,ans=0,median_idx=(n_el+1)/2;
         while(idx<median_idx){
-            idx+=vec[i].second;
-            median=vec[i++].first;
+            idx+=vec[i++].second;
         }
+        median=vec[i-1].first;
         for(i=0;i<n;++i){
             ans+=(1ll*abs(nums[i]-median)*cost[i]);
         }
