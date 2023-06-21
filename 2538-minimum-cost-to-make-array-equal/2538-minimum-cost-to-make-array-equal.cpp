@@ -1,3 +1,4 @@
+//weighted median
 class Solution {
 public:
     long long minCost(vector<int>& nums, vector<int>& cost) {
@@ -37,6 +38,7 @@ public:
 
 
 /*
+//Binary Search (Trinary Problem)
     long long minCost(vector<int>& A, vector<int>& cost) {
         long long l = 1, r = 1000000, res = f(A, cost, 1), x;
         while (l < r) {
@@ -75,6 +77,7 @@ public:
 
 
 /*
+//dp 
 class Solution {
 public:
     long long minCost(vector<int>& nums, vector<int>& cost) {
@@ -115,6 +118,7 @@ public:
 
 
 /*
+//prefix ands suffix
 class Solution {
     int ELEMENT_COUNT = 1000002;
 public:
