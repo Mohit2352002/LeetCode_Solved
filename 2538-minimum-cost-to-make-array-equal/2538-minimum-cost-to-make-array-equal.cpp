@@ -1,3 +1,4 @@
+/*
 class Solution {
 public:
     long long minCost(vector<int>& nums, vector<int>& cost) {
@@ -25,6 +26,44 @@ public:
         return ans;
     }
 };
+*/
+
+
+
+
+
+
+
+
+
+
+
+/*
+    long long minCost(vector<int>& A, vector<int>& cost) {
+        long long l = 1, r = 1000000, res = f(A, cost, 1), x;
+        while (l < r) {
+            x = (l + r) / 2;
+            long long y1 = f(A, cost, x), y2 = f(A, cost, x + 1);
+            res = min(y1, y2);
+            if (y1 < y2)
+                r = x;
+            else
+                l = x + 1;
+        }
+        return res;
+    }
+
+    long long f(vector<int>& A, vector<int>& cost, int x) {
+        long long res = 0;
+        for (int i = 0; i < A.size(); ++i)
+            res += 1L * abs(A[i] - x) * cost[i];
+        return res;
+    }
+ */
+
+
+
+
 
 
 
@@ -38,20 +77,71 @@ public:
 
 
 /*
-long long minCost(vector<int>& nums, vector<int>& cost) {
-       long long N = (sum+1)/2;
-       int x = -1;
-       for(int i=0;i<n;i++){
-           N -= arr[i].second;
-           if(N<=0){
-            x = arr[i].first;
-            break;
-           }
-       }
-     long long ans = 0;
-     for(int i=0;i<n;i++){
-      ans += (long long)abs( (long long) x*cost[i]-(long long) nums[i]*cost[i]);   
-     }
-     return ans;
+class Solution {
+public:
+    long long minCost(vector<int>& nums, vector<int>& cost) {
+        int n = nums.size();
+        long long ans = 1e18;
+        vector<pair<int,int>> v(n);
+        for(int i = 0; i < nums.size(); i++)
+            v[i] = {nums[i], cost[i]};
+        
+        sort(v.begin(), v.end());
+        vector<long long> pref(n), suff(n);
+        long long c_sum = 0, nc = 0;
+        for(int i = 0; i < n; i++){
+            pref[i] = (v[i].first * c_sum - nc);
+            c_sum += (long long)v[i].second;
+            nc += (long long)v[i].first * (long long)v[i].second;
+        }
+        c_sum = 0, nc = 0;
+        for(int i = n - 1; i >= 0; i--){
+            ans = min(ans, abs(v[i].first * c_sum - nc) + pref[i]);
+            c_sum += (long long)v[i].second;
+            nc += (long long)v[i].first * (long long)v[i].second;
+        }
+        return ans;
     }
-    */
+};
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+    int ELEMENT_COUNT = 1000002;
+public:
+    long minCost(vector<int>nums, vector<int>cost) {
+        vector<long long>costOfNos(ELEMENT_COUNT,0);
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            costOfNos[nums[i]] += cost[i];
+        }
+        
+        vector<long long> prefSum(ELEMENT_COUNT);
+        vector<long long> suffSum(ELEMENT_COUNT);
+        long long ans  = LONG_MAX;
+        long long sum = 0;
+        for(int i=1;i<ELEMENT_COUNT;i++){
+            prefSum[i] = prefSum[i-1] + sum;
+            sum += costOfNos[i];
+        }
+        sum = 0;
+        for(int i=ELEMENT_COUNT-2;i>=0;i--){
+            suffSum[i] = suffSum[i+1] + sum;
+            sum += costOfNos[i];
+            ans = min(ans, suffSum[i] + prefSum[i]);
+        }
+        return ans;
+        
+    }
+};
