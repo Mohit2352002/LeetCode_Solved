@@ -1,4 +1,3 @@
-/*
 class Solution {
 public:
     long long minCost(vector<int>& nums, vector<int>& cost) {
@@ -26,7 +25,6 @@ public:
         return ans;
     }
 };
-*/
 
 
 
@@ -116,7 +114,7 @@ public:
 
 
 
-
+/*
 class Solution {
     int ELEMENT_COUNT = 1000002;
 public:
@@ -145,3 +143,4 @@ public:
         
     }
 };
+*/
