@@ -27,16 +27,16 @@ public:
         std::cin.tie(nullptr);
         if(!head) return NULL;
         else if(!head->next) return new TreeNode(head->val);
-        ListNode* slow=head, *fast=head, *slow_prev=NULL;
-        while(fast!=NULL and fast->next!=NULL){
+        ListNode* slow=head, *fast=head->next;
+        while(fast->next!=NULL and fast->next->next!=NULL){
             fast=fast->next->next;
-            slow_prev=slow;
             slow=slow->next;
         }
-        TreeNode*root=new TreeNode(slow->val);
-        root->right=sortedListToBST(slow->next);
-        slow_prev->next=NULL;
+        ListNode*temp=slow->next;
+        slow->next=NULL;
+        TreeNode*root=new TreeNode(temp->val);
         root->left=sortedListToBST(head);
+        root->right=sortedListToBST(temp->next);
         return root;
     }
 };
