@@ -4,6 +4,11 @@ public:
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
+        int const n = size(costs);
+        if(2*candidates + k > n) {
+            nth_element(costs.begin(), k + begin(costs), end(costs));
+            return accumulate(costs.begin(), k + begin(costs), 0L);
+        }
         long long i = 0, j = costs.size() - 1, res = 0;
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         for(; i <= j && candidates; --candidates) {
