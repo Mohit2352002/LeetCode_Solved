@@ -1,3 +1,4 @@
+/*
 class Solution {
 
     const int MOD = 1000000007;
@@ -37,7 +38,7 @@ public:
 
         return helper(nums,start,finish,fuel,dp);
     }
-};
+};*/
 
 
 
@@ -47,54 +48,54 @@ public:
 
 
 
-
-
-
-
-
-
-
-/*
+#define modulo 1000000007
 class Solution {
 public:
-    const int MOD = 1000000007;
+    int countRoutes(vector<int>& locations, int start, int finish, int fuel) {
 
-    int helper(const vector<int>& locations, int city, int finish, int remainFuel, vector<vector<int>>& memo) {
-        if (remainFuel < 0) {
-            return 0;
-        }
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);      
         
-        if (memo[city][remainFuel] != -1) {
-            return memo[city][remainFuel];
-        }
-        
-        int total = city == finish ? 1 : 0;
-        
-        for (int nextCity = 0; nextCity < locations.size(); nextCity++) {
-            if (nextCity != city && remainFuel >= abs(locations[nextCity] - locations[city])) {
-                total = (total + helper(locations, nextCity, finish, remainFuel - abs(locations[nextCity] - locations[city]), memo)) % MOD;
+        int m = locations.size();
+        long long dp[m][fuel+1];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<fuel+1;j++){
+                dp[i][j]=-1;
             }
         }
-        
-        return memo[city][remainFuel] = total;
-    }
+          
+          dp[start][fuel]=1;
 
-    int countRoutes(vector<int>& locations, int start, int finish, int fuel) {
-        int n = locations.size();
-        vector<vector<int>> memo(n, vector<int>(fuel + 1, -1));
-        return helper(locations, start, finish, fuel, memo);
+    
+            for(int j=fuel;j>=0;j--){
+                for(int i=0;i<m;i++){
+                    if(dp[i][j]!=-1){
+                        for(int w=0;w<m;w++){
+                            int remain = j-abs(locations[i]-locations[w]);
+                            if(w!=i && remain>=0){
+                                if(dp[w][remain]==-1) dp[w][remain]=dp[i][j];
+                               else{ dp[w][remain]+=dp[i][j];
+                                dp[w][remain]%=modulo;
+                               }
+                            }
+                        }
+                    }
+                }
+            }
+        
+         long long ans=0;
+           for(int i=0;i<=fuel;i++){
+               if(dp[finish][i]!=-1){
+                   ans+=dp[finish][i];
+                   ans%=modulo;
+               }
+           }
+
+
+        return ans;
     }
 };
-*/
-
-
-
-
-
-
-
-
-
 
 
 /*
@@ -126,5 +127,4 @@ public:
         }
         return dp[start][fuel];
     }
-};
-*/
+};*/
