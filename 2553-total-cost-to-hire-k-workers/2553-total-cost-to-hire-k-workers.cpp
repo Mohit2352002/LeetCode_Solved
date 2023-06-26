@@ -9,14 +9,14 @@ public:
             nth_element(costs.begin(), k + begin(costs), end(costs));
             return accumulate(costs.begin(), k + begin(costs), 0L);
         }
-        long long i = 0, j = costs.size() - 1, res = 0;
+        long long i = 0, j = n - 1, res = 0;
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         for(; i <= j && candidates; --candidates) {
             pq.push({costs[i], i++});
             if (i < j)
                 pq.push({costs[j], j--});
         }
-        while (--k >= 0) {
+        while (k--) {
             auto [sum, p] = pq.top(); pq.pop();
             res += sum;
             if (i <= j) {
