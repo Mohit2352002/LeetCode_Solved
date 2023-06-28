@@ -8,6 +8,65 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+class Solution{
+public:
+    void reorderList(ListNode *head) {
+
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
+
+        if (!head || !head->next) return;
+
+        //reaching mid
+        ListNode*slow=head, *fast=head->next;
+        while(fast and fast->next!=NULL){
+            fast=fast->next->next;
+            slow=slow->next;
+        }
+
+        //cut from the middle and seperate into two individual linked lists
+        ListNode*head2=slow->next;
+        slow->next=NULL;
+
+        //reverse the second linked list
+        fast=head2->next;
+        slow=NULL;
+        while(head2->next!=NULL){
+            fast=head2->next;
+            head2->next=slow;
+            slow=head2;
+            head2=fast;
+        }
+        head2->next=slow;
+
+        //merging the two lists
+        ListNode*temp=head;
+        while(head2){
+            fast=temp;
+            slow=head2;
+            temp=temp->next;
+            head2=head2->next;
+            fast->next=slow;
+            slow->next=temp;
+        }
+
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 // O(N) time, O(1) space in total
 class Solution{
 public:
@@ -47,7 +106,7 @@ public:
         }
         
     }
-};
+};*/
 
 
 
