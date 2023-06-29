@@ -173,7 +173,7 @@ public:
             deletenode(existingNode);
             mp.erase(key);
         }
-        if(mp.size()==cap){
+        else if(mp.size()==cap){
             mp.erase(tail->prev->key);
             deletenode(tail->prev);
         }
