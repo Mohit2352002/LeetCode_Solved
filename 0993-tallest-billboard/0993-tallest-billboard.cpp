@@ -19,7 +19,6 @@ public:
         int ans1 = arr[i]+ helper(arr,i+1,n,firstSum+arr[i],secondSum);
         int ans2 = helper(arr,i+1,n,firstSum,secondSum);
         int ans3 = arr[i]+ helper(arr,i+1,n,firstSum,secondSum+arr[i]);
-       // cout<<ans1<<" "<<ans2<<" "<<ans3<<"; ";
         return dp[i][diff] = max(ans1,max(ans2,ans3));
     }
     int tallestBillboard(vector<int>& rods) {
