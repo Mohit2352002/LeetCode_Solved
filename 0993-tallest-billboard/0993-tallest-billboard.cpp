@@ -1,10 +1,10 @@
 class Solution {
     int maxHeight = 0;
-    const int n = 22;
-    int dp[22][5010];
+    int n = 21;
+    int dp[21][5002];
 
 public:
-    int helper(vector<int>&arr, int i, int n ,int firstSum,int secondSum){
+    int helper(vector<int>&arr, int i, int firstSum,int secondSum){
         
       int diff = abs(firstSum-secondSum);
        if(i==n){
@@ -16,9 +16,9 @@ public:
         if(dp[i][diff]!=-1){
             return dp[i][diff];
         }
-        int ans1 = arr[i]+ helper(arr,i+1,n,firstSum+arr[i],secondSum);
-        int ans2 = helper(arr,i+1,n,firstSum,secondSum);
-        int ans3 = arr[i]+ helper(arr,i+1,n,firstSum,secondSum+arr[i]);
+        int ans1 = arr[i]+ helper(arr,i+1,firstSum+arr[i],secondSum);
+        int ans2 = helper(arr,i+1,firstSum,secondSum);
+        int ans3 = arr[i]+ helper(arr,i+1,firstSum,secondSum+arr[i]);
         return dp[i][diff] = max(ans1,max(ans2,ans3));
     }
     int tallestBillboard(vector<int>& rods) {
@@ -26,9 +26,9 @@ public:
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
-        int n = rods.size();
+        this->n = rods.size();
         memset(dp, -1, sizeof(dp));
-        int ans = helper(rods,0,n,0,0);
+        int ans = helper(rods,0,0,0);
         return ans/2;
     }
 };
