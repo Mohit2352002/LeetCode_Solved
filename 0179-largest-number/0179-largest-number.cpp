@@ -4,6 +4,9 @@ class Solution {
     }
 public:
     string largestNumber(vector<int>& nums) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
         int n=nums.size();
         vector<string>snum(n);
         for(int i=0;i<n;++i) snum[i]=to_string(nums[i]);
