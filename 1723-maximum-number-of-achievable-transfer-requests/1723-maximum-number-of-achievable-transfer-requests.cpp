@@ -1,11 +1,12 @@
 class Solution {
     int ans=0,n;
-    void helper(int idx,vector<int>& count, int transfer, vector<vector<int>> &req){
+    void helper(int idx,vector<int>& count, int transfer, const vector<vector<int>> &req){
         if(idx==n){
             for(int i:count) if(i!=0) return;
             ans=max(ans,transfer);
             return;
         }
+        if (transfer + (n - idx) < ans) return;
         --count[req[idx][0]];
         ++count[req[idx][1]];
         helper(idx+1,count,transfer+1,req);
