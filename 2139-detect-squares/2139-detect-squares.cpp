@@ -5,6 +5,75 @@ static auto _ = [](){
     return nullptr;
 }();
 class DetectSquares {
+public:
+    unordered_map<int,unordered_map<int,int>> xhash;
+    DetectSquares() {
+        xhash.clear();
+    }
+
+    int countoccurrences(int x, int y){
+        auto it = xhash.find(x);
+        if(it == xhash.end())return 0;
+
+        auto itr = xhash[x].find(y);
+        if(itr == xhash[x].end())return 0;
+
+        return xhash[x][y];
+    }
+    
+    void add(vector<int> point) {
+        int x = point[0];
+        int y = point[1];
+        xhash[x][y]++;
+        return;
+    }
+    
+    int count(vector<int> point) {
+        int x = point[0];
+        int y = point[1];
+        int ans = 0;
+
+        for(auto itr: xhash[x]){
+            if(itr.first == y)continue;
+            int y2 = itr.first;
+            int count2 = itr.second;
+            int s = abs(y - y2);
+
+            int x3 = x + s;
+            int y3 = y2;
+            int count3 = countoccurrences(x3,y3);
+
+            int x4 = x + s;
+            int y4 = y;
+            int count4 = countoccurrences(x4,y4);
+
+            ans += (count2 * count3 * count4);
+
+            x3 = x-s;
+            count3 = countoccurrences(x3,y3);
+
+            x4 = x-s;
+            count4 = countoccurrences(x4,y4);
+
+            ans += (count2*count3 * count4);
+        }
+
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+/*
+class DetectSquares {
     int cntPoints[1001][1001] = {};
     vector<pair<int, int>> points;
 public:
@@ -26,7 +95,7 @@ public:
         }
         return ans;
     }
-};
+};*/
 
 /**
  * Your DetectSquares object will be instantiated and called as such:
