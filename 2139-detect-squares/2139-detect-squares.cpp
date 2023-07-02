@@ -13,10 +13,10 @@ public:
 
     int countoccurrences(int x, int y){
         auto it = xhash.find(x);
-        if(it == xhash.end())return 0;
+        if(it == xhash.end()) return 0;
 
         auto itr = xhash[x].find(y);
-        if(itr == xhash[x].end())return 0;
+        if(itr == xhash[x].end()) return 0;
 
         return xhash[x][y];
     }
@@ -24,7 +24,7 @@ public:
     void add(vector<int> point) {
         int x = point[0];
         int y = point[1];
-        xhash[x][y]++;
+        ++xhash[x][y];
         return;
     }
     
@@ -34,7 +34,7 @@ public:
         int ans = 0;
 
         for(auto itr: xhash[x]){
-            if(itr.first == y)continue;
+            if(itr.first == y) continue;
             int y2 = itr.first;
             int count2 = itr.second;
             int s = abs(y - y2);
@@ -55,7 +55,7 @@ public:
             x4 = x-s;
             count4 = countoccurrences(x4,y4);
 
-            ans += (count2*count3 * count4);
+            ans += (count2 * count3 * count4);
         }
 
         return ans;
