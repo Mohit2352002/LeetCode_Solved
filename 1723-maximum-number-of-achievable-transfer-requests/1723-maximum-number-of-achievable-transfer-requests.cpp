@@ -6,7 +6,7 @@ class Solution {
             ans=max(ans,transfer);
             return;
         }
-        if (transfer + (n - idx) < ans) return;
+        if (transfer + (n - idx) <= ans) return;
         --count[req[idx][0]];
         ++count[req[idx][1]];
         helper(idx+1,count,transfer+1,req);
