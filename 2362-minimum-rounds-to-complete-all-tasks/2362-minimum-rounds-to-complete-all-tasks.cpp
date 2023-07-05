@@ -1,6 +1,9 @@
 class Solution {
 public:
     int minimumRounds(vector<int>& tasks) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
         unordered_map<int,int>mp;
         for(int &task:tasks){
             ++mp[task];
@@ -8,7 +11,6 @@ public:
         int ans=0;
         for(auto &el:mp){
             if(el.second==1) return -1;
-            else if(el.second==2) ++ans;
             else{
                 ans+=(ceil(1.0*el.second/3));
             }
