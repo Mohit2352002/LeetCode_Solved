@@ -28,6 +28,62 @@ public:
 
         if(!head || !head->next || k==1) return head;
 
+        ListNode*dummy=new ListNode(-1);
+        dummy->next=head;
+
+        ListNode* beforeHead=dummy, *end=head;
+        int i=0;
+        while(end!=NULL){
+            ++i;
+            if(i%k==0){
+                ListNode*start=beforeHead->next, *temp=end->next;
+                reverseNodes(start,end);
+                start->next=temp;
+                beforeHead->next=end;
+                beforeHead=start;
+                end=temp;
+            }else{
+                end=end->next;
+            }
+        }
+        return dummy->next;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//SC:(O(N/k)) TC:O(N)
+class Solution {
+    void reverseNodes(ListNode* head, ListNode *end){
+        if(head==NULL) return;
+        ListNode*slow=NULL,*fast=head->next;
+        while(slow!=end){
+            head->next=slow;
+            slow=head;
+            head=fast;
+            if(fast!=NULL) fast=fast->next;
+        }
+    }
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
+
+        if(!head || !head->next || k==1) return head;
+
         ListNode *start=head, *end=head;
         int count=k-1;
         while(count--){
@@ -37,10 +93,14 @@ public:
 
         ListNode* nextHead=reverseKGroup(end->next,k);
         reverseNodes(start,end);
-        start->next=nextHead;
+        start->next=nextHead; 
         return end;
     }
-};
+};*/
+
+
+
+
 
 
 
