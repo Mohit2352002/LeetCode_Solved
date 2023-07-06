@@ -10,7 +10,7 @@ public:
         while(j<n and i<=j){
             sum+=nums[j++];
             if(sum>=target){
-                while(j<=n and sum>=target and i<=j){
+                while(sum>=target and i<=j){
                     ans=min(ans,j-i);
                     sum-=nums[i++];
                 }
