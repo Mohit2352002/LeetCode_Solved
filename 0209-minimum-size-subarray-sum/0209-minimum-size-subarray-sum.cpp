@@ -7,13 +7,11 @@ public:
         if(target==1) return 1;
         if(nums.size()==1) return target<=nums[0];
         int i=0,j=0,ans=INT_MAX,sum=0,n=nums.size();
-        while(j<n and i<=j){
+        while(j<n){
             sum+=nums[j++];
-            if(sum>=target){
-                while(sum>=target and i<=j){
-                    ans=min(ans,j-i);
-                    sum-=nums[i++];
-                }
+            while(sum>=target and i<n){
+                ans=min(ans,j-i);
+                sum-=nums[i++];
             }
         }
         if(ans==INT_MAX) return 0;
