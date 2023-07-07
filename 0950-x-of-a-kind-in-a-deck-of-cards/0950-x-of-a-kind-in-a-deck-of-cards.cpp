@@ -5,10 +5,10 @@ public:
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
         unordered_map<int, int> cnt;
-        for (int &card : deck) ++cnt[card];
+        for (int card : deck) ++cnt[card];
         int g = cnt[deck[0]];
         if (g == 1) return false;
-        for (auto &el:cnt) if ((g = __gcd(g, el.second)) == 1) return false;
+        for (auto el:cnt) if ((g = __gcd(g, el.second)) == 1) return false;
         return true;
     }
 };
