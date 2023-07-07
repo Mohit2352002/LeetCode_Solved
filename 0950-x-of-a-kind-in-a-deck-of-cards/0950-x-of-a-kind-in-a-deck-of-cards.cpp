@@ -1,13 +1,14 @@
-int speedup = []{ios::sync_with_stdio(0); cin.tie(0); return 0; }();
 class Solution {
-    int cnt[10000];
 public:
     bool hasGroupsSizeX(vector<int>& deck) {
-        for (int d : deck) cnt[d] = 0;
-        for (int d : deck) ++cnt[d];
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
+        unordered_map<int, int> cnt;
+        for (int &card : deck) ++cnt[card];
         int g = cnt[deck[0]];
         if (g == 1) return false;
-        for (int d : deck) if ((g = __gcd(g, cnt[d])) == 1) return false;
+        for (auto &el:cnt) if ((g = __gcd(g, el.second)) == 1) return false;
         return true;
     }
 };
