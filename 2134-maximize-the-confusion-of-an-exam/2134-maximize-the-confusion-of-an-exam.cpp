@@ -6,15 +6,15 @@ public:
         std::cin.tie(nullptr);
         int i=0,j=0,n = anskey.length(),ctt=0,ctf=0,ans=0;
         while(j<n){
-            if(anskey[j]=='T') ctt++;
-            else ctf++;
+            if(anskey[j]=='T') ++ctt;
+            else ++ctf;
             while(min(ctf,ctt)>k){
-                if(anskey[i]=='T') ctt--;
-                else ctf--;
-                i++;
+                if(anskey[i]=='T') --ctt;
+                else --ctf;
+                ++i;
             }
-            ans =max(ans , j-i+1);
-            j++;
+            ++j;
+            ans =max(ans , j-i);
         }
         return ans ;
     }
