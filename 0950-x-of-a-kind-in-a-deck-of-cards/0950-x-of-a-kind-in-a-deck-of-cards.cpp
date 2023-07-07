@@ -1,5 +1,4 @@
 int speedup = []{ios::sync_with_stdio(0); cin.tie(0); return 0; }();
-
 class Solution {
     int cnt[10000];
 public:
