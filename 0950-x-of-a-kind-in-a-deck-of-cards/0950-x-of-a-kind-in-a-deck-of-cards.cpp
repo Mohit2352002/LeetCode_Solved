@@ -8,7 +8,7 @@ public:
         for (int d : deck) ++cnt[d];
         int g = cnt[deck[0]];
         if (g == 1) return false;
-        for (int d : deck) if ((g = gcd(g, cnt[d])) == 1) return false;
+        for (int d : deck) if ((g = __gcd(g, cnt[d])) == 1) return false;
         return true;
     }
 };
