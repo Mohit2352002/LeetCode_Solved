@@ -19,3 +19,34 @@ public:
         return maxScore-minScore;
     }
 };
+
+
+
+
+
+
+
+
+
+
+/*
+class Solution {
+public:
+    long long putMarbles(vector<int>& weights, int k) {
+        int n = weights.size();
+        vector<int> scores;
+        for(int i = 1; i < n; ++i)
+            scores.push_back(weights[i-1] + weights[i]);
+
+        auto kth = scores.begin() + --k;
+        nth_element(scores.begin(), kth, scores.end(), greater<int>());
+        long long max = accumulate(scores.begin(), kth, (long long)0);
+
+        kth = scores.begin() + k;
+        nth_element(scores.begin(), kth, scores.end());
+        long long min = accumulate(scores.begin(), kth, (long long)0);
+
+        return max - min;
+    }
+};
+*/
