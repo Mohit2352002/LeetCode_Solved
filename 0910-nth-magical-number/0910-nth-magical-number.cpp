@@ -10,6 +10,6 @@ public:
             if(factor<n) low=mid+1;
             else high=mid;
         }
-        return low%mod;
+        return high%mod;
     }
 };
