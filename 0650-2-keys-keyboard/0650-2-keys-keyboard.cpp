@@ -1,6 +1,10 @@
 class Solution {
 public:
     int minSteps(int n) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
+        
         if(n==1)return 0;
         int strLen=2;
         int count=2;
@@ -8,7 +12,7 @@ public:
 
         while(n-strLen>0){
             if((n-strLen)%strLen==0){
-                count++;
+                ++count;
                 copy=strLen;
                 // this is copy
             }
