@@ -5,7 +5,7 @@ public:
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
         int n=weights.size();
-        if(n<3 || k==1) return 0;
+        if(n<3 || k==1 || n==k) return 0;
         vector<int>adjacentSums(n-1,0);
         long long minScore=0,maxScore=0;
         for(int i=0;i<n-1;++i){
