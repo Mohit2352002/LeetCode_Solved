@@ -1,4 +1,27 @@
 class Solution {
+public:
+    int minSteps(int n) {
+        if(n==1)return 0;
+        int strLen=2;
+        int count=2;
+        int copy=1;
+
+        while(n-strLen>0){
+            if((n-strLen)%strLen==0){
+                count++;
+                copy=strLen;
+                // this is copy
+            }
+            // paste
+            count++;
+            strLen+=copy;
+        }
+
+        return count;
+    }
+};
+/*
+class Solution {
     set<pair<int,int>>s;
     int solve(int i,int j, int n){
         if(i>n) return 1e9;
@@ -13,7 +36,6 @@ class Solution {
 public:
     int minSteps(int n) {
         if(n==1) return 0;
-        if(n==24) return 9;
         return 2+solve(2,1,n);
     }
-};
+};*/
