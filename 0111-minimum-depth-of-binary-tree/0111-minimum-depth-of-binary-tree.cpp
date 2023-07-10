@@ -25,8 +25,10 @@ public:
                 TreeNode*curr_node=q.front();
                 q.pop();
                 if(curr_node->left==NULL and curr_node->right==NULL) return ans;
-                if(curr_node->left!=NULL) q.push(curr_node->left);
-                if(curr_node->right!=NULL) q.push(curr_node->right);
+                else{
+                    if(curr_node->left!=NULL) q.push(curr_node->left);
+                    if(curr_node->right!=NULL) q.push(curr_node->right);
+                }
             }
             ++ans;
         }
