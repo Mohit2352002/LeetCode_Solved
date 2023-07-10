@@ -6,25 +6,30 @@ class Solution {
     bool prime[n + 1];
     memset(prime, true, sizeof(prime));
     int count=0;
+    int ans=n/2;
   
-    for (int p = 2; p * p <= n; p++) {
+    for (int p = 3; p * p < n; p+=2) {
         // If prime[p] is not changed, then it is a prime
         if (prime[p] == true) {
             // Update all multiples of p greater than or
             // equal to the square of it numbers which are
             // multiple of p and are less than p^2 are
             // already been marked.
-            for (int i = p * p; i <= n; i += p)
-                prime[i] = false;
+            for (int i = p * p; i < n; i += 2*p)
+                if(prime[i]){
+                    prime[i] = false;
+                    --ans;
+                }
         }
     }
   
-    // Print all prime numbers
-    for (int p = 2; p < n; p++)
-        if (prime[p])
-            count++;
+    // Count all prime numbers
+    // for (int p = 2; p < n; p++)
+    //     if (prime[p])
+    //         count++;
     
-    return count;
+    // return count;
+    return ans;
 }
 public:
     int countPrimes(int n) {
