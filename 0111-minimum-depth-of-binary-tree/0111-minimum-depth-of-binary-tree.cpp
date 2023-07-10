@@ -15,8 +15,7 @@ public:
     int dfs(TreeNode* root) {
         if (root == NULL) {
             return 0;
-        }
-        if(!root->right){
+        }else if(!root->right){
             return 1+dfs(root->left);
         }else if(!root->left){
             return 1+dfs(root->right);
