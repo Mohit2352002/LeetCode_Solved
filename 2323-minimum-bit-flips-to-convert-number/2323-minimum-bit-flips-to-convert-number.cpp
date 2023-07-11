@@ -4,7 +4,7 @@ public:
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
-        long  x=start^goal,c=0;
+        int  x=start^goal,c=0;
         while(x){
             c+=x&1;
             x=x>>1;
