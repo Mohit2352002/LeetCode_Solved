@@ -1,34 +1,38 @@
 class Solution {
     vector<int>par;
     int find(int &child){
-        if(par[child]==child) return child;
-        return par[child]=find(par[child]);
+        return child==par[child]? child:par[child]=find(par[child]);
     }
-    void Union(int &num1,int num2){
-        int p1=find(num1),p2=find(num2);
-        if(p1==p2) return;
-        par[p1]=p2;
+    void merge(int x, int y) {
+        x = find(x);
+        y = find(y);
+        if(x!=y) par[y] = x;
     }
 public:
     int largestComponentSize(vector<int>& nums) {
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
-        int n=nums.size(),max_el=n;
+        int n=nums.size(),max_el=n,ans=0;
         for(int &num:nums) max_el=max(max_el,num);
         par.resize(max_el+1);
         for(int i=1;i<=max_el;++i) par[i]=i;
         for(int &num:nums){
-            for(int factor=2;factor*factor<=num;++factor){
-                if(num%factor==0){
+            if(num==1){
+                ++ans;
+                continue;
+            }
+            int copy=num;
+            for(int factor=2;factor*factor<=copy;++factor){
+                if(copy%factor==0){
                     //valid factor
-                    Union(num,factor);
-                    Union(num,num/factor);
+                    merge(num,factor);
+                    while(copy%factor==0) copy/=factor;
                 }
             }
+            if(copy!=1) merge(num,copy);
         }
         unordered_map<int,int>cache;
-        int ans=0;
         for(int &num:nums){
             ++cache[find(num)];
             ans=max(ans,cache[par[num]]);
@@ -37,6 +41,9 @@ public:
     }
 };
 
+
+        
+        
 /*
 //Brute force Solution leading TLE
 class Solution {
