@@ -14,10 +14,10 @@ public:
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
         int n=nums.size(),max_el=n;
-        for(int num:nums) max_el=max(max_el,num);
+        for(int &num:nums) max_el=max(max_el,num);
         par.resize(max_el+1);
         for(int i=1;i<=max_el;++i) par[i]=i;
-        for(int num:nums){
+        for(int &num:nums){
             for(int factor=2;factor*factor<=num;++factor){
                 if(num%factor==0){
                     //valid factor
@@ -28,7 +28,7 @@ public:
         }
         unordered_map<int,int>cache;
         int ans=0;
-        for(int num:nums){
+        for(int &num:nums){
             ++cache[find(num)];
             ans=max(ans,cache[par[num]]);
         }
