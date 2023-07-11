@@ -8,9 +8,9 @@
  * };
  */
 class Solution {
-    unordered_map<int,TreeNode*>parent;
+    unordered_map<TreeNode*,TreeNode*>parent;
     void findParent(TreeNode* node, TreeNode*par){
-        parent[node->val]=par;
+        parent[node]=par;
         if(node->left!=NULL) findParent(node->left,node);
         if(node->right!=NULL) findParent(node->right,node);
     }
@@ -32,17 +32,17 @@ public:
             while(sz--){
                 TreeNode* curr_node=q.front();
                 q.pop();
-                if(curr_node->left!=NULL and !vis[curr_node->left]){
+                if(curr_node->left and !vis[curr_node->left]){
                     q.push(curr_node->left);
                     vis[curr_node->left]=true;;
                 }
-                if(curr_node->right!=NULL and !vis[curr_node->right]){
+                if(curr_node->right and !vis[curr_node->right]){
                     q.push(curr_node->right);
                     vis[curr_node->right]=true;
                 }
-                if(parent[curr_node->val]!=NULL and !vis[parent[curr_node->val]]){ 
-                    q.push(parent[curr_node->val]);
-                    vis[parent[curr_node->val]]=true;
+                if(parent[curr_node] and !vis[parent[curr_node]]){ 
+                    q.push(parent[curr_node]);
+                    vis[parent[curr_node]]=true;
                 }
             }
             ++dist;
