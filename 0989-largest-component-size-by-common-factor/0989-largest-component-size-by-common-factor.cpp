@@ -1,10 +1,10 @@
 class Solution {
     vector<int>par;
-    int find(int child){
+    int find(int &child){
         if(par[child]==child) return child;
         return par[child]=find(par[child]);
     }
-    void Union(int num1,int num2){
+    void Union(int &num1,int num2){
         int p1=find(num1),p2=find(num2);
         par[p1]=p2;
     }
