@@ -6,6 +6,7 @@ class Solution {
     }
     void Union(int &num1,int num2){
         int p1=find(num1),p2=find(num2);
+        if(p1==p2) return;
         par[p1]=p2;
     }
 public:
