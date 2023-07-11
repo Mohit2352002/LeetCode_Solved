@@ -23,26 +23,26 @@ public:
         findParent(root,NULL);
         queue<TreeNode*>q;
         q.push(target);
-        set<TreeNode*>vis;
+        unordered_map<TreeNode*,bool>vis;
         int dist=0;
         vector<int>ans;
-        vis.insert(target);
+        vis[target]=true;
         while(!q.empty() and dist!=k){
             int sz=q.size();
             while(sz--){
                 TreeNode* curr_node=q.front();
                 q.pop();
-                if(curr_node->left!=NULL and vis.find(curr_node->left)==vis.end()){
+                if(curr_node->left!=NULL and !vis[curr_node->left]){
                     q.push(curr_node->left);
-                    vis.insert(curr_node->left);
+                    vis[curr_node->left]=true;;
                 }
-                if(curr_node->right!=NULL and vis.find(curr_node->right)==vis.end()){
+                if(curr_node->right!=NULL and !vis[curr_node->right]){
                     q.push(curr_node->right);
-                    vis.insert(curr_node->right);
+                    vis[curr_node->right]=true;
                 }
-                if(parent[curr_node->val]!=NULL and vis.find(parent[curr_node->val])==vis.end()){ 
+                if(parent[curr_node->val]!=NULL and !vis[parent[curr_node->val]]){ 
                     q.push(parent[curr_node->val]);
-                    vis.insert(parent[curr_node->val]);
+                    vis[parent[curr_node->val]]=true;
                 }
             }
             ++dist;
