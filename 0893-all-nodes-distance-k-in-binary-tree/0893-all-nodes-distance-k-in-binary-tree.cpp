@@ -7,6 +7,75 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+ /**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void mark_parent(TreeNode* root, unordered_map<TreeNode*, TreeNode*> & parent){
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode* current = q.front();
+            q.pop();
+            if(current->left){
+                parent[current->left] = current;
+                q.push(current->left);
+            }
+            if(current->right){
+                parent[current->right] = current;
+                q.push(current->right);
+            }
+        }
+    }
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
+        unordered_map<TreeNode*, TreeNode*> parent;
+        mark_parent(root, parent);
+        unordered_map<TreeNode*, bool> vis;
+        queue<TreeNode*> q;
+        q.push(target);
+        vis[target]=true;
+        int dis = 0;
+        while(!q.empty()){
+            int n = q.size();
+            if(dis==k) break;
+            dis++;
+            for(int i=0; i<n; i++){
+                TreeNode* curr = q.front();
+                q.pop();
+                if(curr->left && !vis[curr->left]){
+                    q.push(curr->left);
+                    vis[curr->left] = true;
+                }
+                if(curr->right && !vis[curr->right]){
+                    q.push(curr->right);
+                    vis[curr->right] = true;
+                }
+                if(parent[curr] && !vis[parent[curr]]){
+                    q.push(parent[curr]);
+                    vis[parent[curr]] = true;
+                }
+
+            }
+        }
+        vector<int> ans;
+        while(!q.empty()){
+            ans.push_back(q.front()->val);
+            q.pop();
+        }
+        return ans;
+    }
+};
+/*
 class Solution {
     unordered_map<TreeNode*,TreeNode*>parent;
     void findParent(TreeNode* node, TreeNode*par){
@@ -53,4 +122,4 @@ public:
         }
         return ans;
     }
-};
+};*/
