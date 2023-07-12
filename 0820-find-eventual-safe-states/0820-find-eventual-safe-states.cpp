@@ -1,3 +1,4 @@
+/*
 class Solution {
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
@@ -48,7 +49,7 @@ public:
         }
         return safeNodes;
     }
-};
+};*/
 
 
 
@@ -59,7 +60,7 @@ public:
 
 
 
-/*
+
 class Solution {
 public:
     bool dfs(int node, vector<vector<int>>& adj, vector<bool>& visit, vector<bool>& inStack) {
@@ -108,4 +109,3 @@ public:
         return safeNodes;
     }
 };
-*/
