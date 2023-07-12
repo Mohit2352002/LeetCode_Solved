@@ -5,7 +5,7 @@ public:
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
         int ans=0;
-        for(int &num:nums) ans^=num;
+        for(const int &num:nums) ans^=num;
         return ans;
     }
 };
