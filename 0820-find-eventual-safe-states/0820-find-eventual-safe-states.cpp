@@ -88,20 +88,13 @@ public:
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
-        
-        int n = graph.size();
-        vector<vector<int>> adj(n);
 
-        for (int i = 0; i < n; i++) {
-            for (auto node : graph[i]) {
-                adj[i].push_back(node);
-            }
-        }
+        int n = graph.size();
 
         vector<bool> visit(n), inStack(n);
 
         for (int i = 0; i < n; i++) {
-            dfs(i, adj, visit, inStack);
+            dfs(i, graph, visit, inStack);
         }
 
         vector<int> safeNodes;
