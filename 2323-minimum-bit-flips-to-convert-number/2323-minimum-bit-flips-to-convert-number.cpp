@@ -4,12 +4,14 @@ public:
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
-        int  x=start^goal,c=0;
-        while(x){
-            c+=x&1;
-            x>>=1;
-        }
-        return c;
+        int  x=start^goal;
+        //intc=0;
+        // while(x){
+        //     c+=x&1;
+        //     x>>=1;
+        // }
+        //return c;
+        return __builtin_popcount(x);
     }
 };
 
