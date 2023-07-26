@@ -6,8 +6,8 @@ static auto _ = [](){
 }();
 class Solution {
     bool valid(int speed, vector<int>&nums, double time, int &n){
-        double hours=ceil(1.0*nums[0]/speed);
-        for(int i=1;i<n-1;++i){
+        double hours=0;
+        for(int i=0;i<n-1;++i){
             hours+=ceil(1.0*nums[i]/speed);
             if(hours>time) return false;
         }
@@ -18,10 +18,6 @@ class Solution {
 public:
     int minSpeedOnTime(vector<int>& dist, double hour) {
         int n=dist.size();
-        if(n==1){
-            if(ceil(1.0*dist[0]/hour)==(dist[0]/hour)+1) return dist[0]/hour;
-            return ceil(dist[0]/hour);
-        }
         if((floor(hour)==hour and n>hour) || n-1>floor(hour)) return -1;
         int low=1, high=1e7;
         while(low<high){
