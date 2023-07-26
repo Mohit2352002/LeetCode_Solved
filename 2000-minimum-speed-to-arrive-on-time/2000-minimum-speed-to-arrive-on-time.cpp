@@ -1,3 +1,9 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
 class Solution {
     bool valid(int speed, vector<int>&nums, double time, int &n){
         double hours=0;
@@ -12,8 +18,7 @@ class Solution {
 public:
     int minSpeedOnTime(vector<int>& dist, double hour) {
         int n=dist.size();
-        if(floor(hour)==hour and n>hour) return -1;
-        if(n-1>floor(hour)) return -1;
+        if((floor(hour)==hour and n>hour) || n-1>floor(hour)) return -1;
         int low=1, high=1e9;
         while(low<high){
             int mid=low+((high-low)/2);
