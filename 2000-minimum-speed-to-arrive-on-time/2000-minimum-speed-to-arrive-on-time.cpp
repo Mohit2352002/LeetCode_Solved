@@ -18,13 +18,13 @@ class Solution {
 public:
     int minSpeedOnTime(vector<int>& dist, double hour) {
         int n=dist.size();
-        if(n-1>hour) return -1;
+        if((floor(hour)==hour and n>hour) || n-1>floor(hour)) return -1;
         int low=1, high=1e7;
-        while(low<=high){
+        while(low<high){
             int mid=low+((high-low)/2);
-            if(valid(mid,dist,hour,n)) high=mid-1;
+            if(valid(mid,dist,hour,n)) high=mid;
             else low=mid+1;
         }
-        return low>1e7?-1:low;
+        return low;
     }
 };
