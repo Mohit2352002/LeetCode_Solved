@@ -21,7 +21,7 @@ public:
         for(int i=1;i<sz;++i){
             sum+=nums[i];
         }
-        //if(n==1) return sum;
+        if(n==1) return sum;
         long long high=sum/n, low=1;
         while(low<high){
             long long mid=low+((high-low)/2)+1;
