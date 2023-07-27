@@ -4,6 +4,7 @@ static auto _ = [](){
     cout.tie(nullptr);
     return nullptr;
 }();
+class Solution {
 struct Node{
     Node* link[2];
 };
@@ -38,7 +39,6 @@ class Trie{
         return maxNum;
     }
 };
-class Solution {
 public:
     int findMaximumXOR(vector<int>& nums) {
         Trie tr;
