@@ -6,10 +6,10 @@ static auto _ = [](){
 }();
 class Solution {
     bool valid(long long ans, vector<int>&nums, int &n, int &sz){
-        long long sum=min<long long>(ans,nums[0]);
+        long long sum=min(ans,(long long) nums[0]);
         if(sum>=(1ll*ans*n)) return true;
         for(int i=1;i<sz;++i){
-            sum+=min<long long>(ans,nums[i]);
+            sum+=min(ans,(long long) nums[i]);
             if(sum>=(1ll*ans*n)) return true;
         }
         return false;
@@ -23,11 +23,11 @@ public:
         }
         if(n==1) return sum;
         long long high=sum/n, low=1;
-        while(low<high){
-            long long mid=low+((high-low)/2)+1;
-            if(valid(mid,nums,n,sz)) low=mid;
+        while(low<=high){
+            long long mid=low+((high-low)/2);
+            if(valid(mid,nums,n,sz)) low=mid+1;
             else high=mid-1;
         }
-        return low;
+        return low-1;
     }
 };
