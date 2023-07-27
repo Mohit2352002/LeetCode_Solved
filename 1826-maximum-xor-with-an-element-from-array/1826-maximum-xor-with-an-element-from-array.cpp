@@ -58,18 +58,21 @@ public:
         Trie tr;
         i=0;
         while(t--){
-            int maxi=-1;
+            //int maxi=-1;
             for(;j<n and nums[j]<=qu[i][1];++j){
                 tr.insert(nums[j]);
             }
-            if(nums[0]>qu[i][1]){ 
-                ans[qu[i++][2]]=maxi;
-                continue;
+            // if(nums[0]>qu[i][1]){ 
+            //     ans[qu[i++][2]]=maxi;
+            //     continue;
+            // }
+            // maxi=max(maxi,tr.getMax(qu[i][0]));
+            // ans[qu[i++][2]]=maxi;
+            if(j==0) ans[qu[i++][2]]=-1;
+            else{
+                ans[qu[i][2]]=tr.getMax(qu[i][0]);
+                ++i;
             }
-            maxi=max(maxi,tr.getMax(qu[i][0]));
-            ans[qu[i++][2]]=maxi;
-            // if(j==0) ans[qu[i++][2]]=-1;
-            // else ans[qu[i][2]]=tr.getMax(qu[i++][0]);
             //if(j!=0) ans[qu[i][2]]=tr.getMax(qu[i++][0]);
             //else ans[qu[i++][2]]=-1;
         }
