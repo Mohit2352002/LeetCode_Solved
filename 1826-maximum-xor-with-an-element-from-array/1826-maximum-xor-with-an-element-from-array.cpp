@@ -51,23 +51,27 @@ public:
         sort(qu.begin(),qu.end(),[&](const vector<int>&a,const vector<int>&b){
             return a[1]<b[1];
         });
-        vector<int>ans(t,-1);
+        vector<int>ans(t);
         sort(nums.begin(),nums.end(),[&](const int &a,const int&b){
             return a<b;
         });
         Trie tr;
         i=0;
         while(t--){
-            maxi=-1;
+            int maxi=-1;
             for(;j<n and nums[j]<=qu[i][1];++j){
                 tr.insert(nums[j]);
             }
             if(nums[0]>qu[i][1]){ 
-                ++i;
+                ans[qu[i++][2]]=maxi;
                 continue;
             }
             maxi=max(maxi,tr.getMax(qu[i][0]));
             ans[qu[i++][2]]=maxi;
+            // if(j==0) ans[qu[i++][2]]=-1;
+            // else ans[qu[i][2]]=tr.getMax(qu[i++][0]);
+            //if(j!=0) ans[qu[i][2]]=tr.getMax(qu[i++][0]);
+            //else ans[qu[i++][2]]=-1;
         }
         return ans;
     }
