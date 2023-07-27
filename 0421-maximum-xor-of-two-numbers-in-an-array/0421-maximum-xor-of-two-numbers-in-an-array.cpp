@@ -15,7 +15,7 @@ class Trie{
     }
     void insert(int num){
         Node*node=root;
-        for(int i=31;i>=0;--i){
+        for(int i=30;i>=0;--i){
             int bit=((num>>i)&1);
             if(node->link[bit]==NULL){
                 node->link[bit]=new Node();
@@ -26,11 +26,11 @@ class Trie{
     int getMax(int num){
         Node*node=root;
         int maxNum=0;
-        for(int i=31;i>=0;--i){
+        for(int i=30;i>=0;--i){
             int bit=((num>>i)&1);
-            if(node->link[1-bit]!=NULL){
+            if(node->link[1^bit]!=NULL){
                 maxNum|=(1<<i);
-                node=node->link[1-bit];
+                node=node->link[1^bit];
             }else{
                 node=node->link[bit];
             }
