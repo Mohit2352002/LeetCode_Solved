@@ -5,10 +5,11 @@ static auto _ = [](){
     return nullptr;
 }();
 class Solution {
-    bool valid(int ans, vector<int>&nums, int &n, int &sz){
-        long long sum=min(ans,nums[0]);
+    bool valid(long long ans, vector<int>&nums, int &n, int &sz){
+        long long sum=min<long long>(ans,nums[0]);
+        if(sum>=(1ll*ans*n)) return true;
         for(int i=1;i<sz;++i){
-            sum+=min(ans,nums[i]);
+            sum+=min<long long>(ans,nums[i]);
             if(sum>=(1ll*ans*n)) return true;
         }
         return false;
@@ -20,7 +21,7 @@ public:
         for(int i=1;i<sz;++i){
             sum+=nums[i];
         }
-        if(n==1) return sum;
+        //if(n==1) return sum;
         long long high=sum/n, low=1;
         while(low<high){
             long long mid=low+((high-low)/2)+1;
