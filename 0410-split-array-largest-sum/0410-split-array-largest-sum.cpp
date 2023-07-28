@@ -20,7 +20,7 @@ class Solution {
     }
 public:
     int splitArray(vector<int>& nums, int k) {
-        int ans=INT_MAX,hi=0,low=0;
+        int hi=0,low=0;
         for(int &el:nums){
             hi+=el;
             low=max(low,el);
