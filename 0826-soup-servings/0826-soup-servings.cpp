@@ -11,16 +11,15 @@ class Solution {
         if(a<=0) return 1.0;
         if(b<=0) return 0.0;
         if(mp.count({a,b})) return mp[{a,b}];
-        double ans=0.0;
-        ans+=helper(a-100,b);
-        ans+=helper(a-75,b-25);
-        ans+=helper(a-50,b-50);
-        ans+=helper(a-25,b-75);
-        return mp[{a,b}]=(double)ans*0.25;
+        mp[{a,b}]+=helper(a-100,b);
+        mp[{a,b}]+=helper(a-75,b-25);
+        mp[{a,b}]+=helper(a-50,b-50);
+        mp[{a,b}]+=helper(a-25,b-75);
+        return mp[{a,b}]*=0.25;
     }
 public:
     double soupServings(int n) {
-        if(n>=5000) return 1.0;
+        if(n>4500) return 1.0;
         return helper(n,n);
     }
 };
