@@ -1,12 +1,18 @@
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
+    int removeDuplicates(vector<int>& nums){
         std::ios_base::sync_with_stdio(false);
         std::cout.tie(nullptr);
         std::cin.tie(nullptr);
-        int i=0;
-        for(int &el:nums){
-            if(i==0 or i==1 or nums[i-2]!=el) nums[i++]=el;
+        if(nums.size()<3){
+            return nums.size();
+        }
+        int i=2;
+        for(int j=2;j<nums.size();j++){
+            if(nums[i-2]!=nums[j]){
+                nums[i]=nums[j];
+                i++;
+            }
         }
         return i;
     }
