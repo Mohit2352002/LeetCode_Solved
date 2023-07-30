@@ -10,17 +10,16 @@ public:
         if(pos >= n || k == 0 || pos==-1) return 0;
         if(dp[pos][k] != -1) return dp[pos][k];
         // finding the next event which we can attend
-        int left=pos+1,right=n-1,i=-1;
+        int left=pos+1,right=n-1;
         while(left<=right){
             int mid=left+(right-left)/2;
             if(events[mid][0] > events[pos][1]){
                 right=mid-1;
-                i=mid;
             }else{
                 left=mid+1;
             }
         }
-       return dp[pos][k] = max(solve(dp, events, n, pos+1, k), events[pos][2] + solve(dp, events, n, i, k-1));
+       return dp[pos][k] = max(solve(dp, events, n, pos+1, k), events[pos][2] + solve(dp, events, n, left, k-1));
     }
     
     int maxValue(vector<vector<int>>& events, int k){
