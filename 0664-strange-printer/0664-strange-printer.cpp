@@ -32,7 +32,7 @@ public:
         int ans = 1 + solve(s, x+1, j);
         for(int k = x+1; k<=j; ++k){
             if(s[k] == s[i])
-                ans = min(ans, solve(s, k,j ) + solve(s, x+1, k-1));
+                ans = min(ans,solve(s, x, k-1) + solve(s, k+1,j ));
         }
         return dp[i][j] = ans;
     }
