@@ -28,11 +28,9 @@ public:
         if(i>j)             return 0;
         if(dp[i][j]!=0)     return dp[i][j];
         int x = i;
-        
-        while(x+1<=j && s[x]==s[x+1]) 
-            x++;
+        while(x+1<=j && s[x]==s[x+1]) ++x;
         int ans = 1 + solve(s, x+1, j);
-        for(int k = x+1; k<=j; k++){
+        for(int k = x+1; k<=j; ++k){
             if(s[k] == s[i])
                 ans = min(ans, solve(s, k,j ) + solve(s, x+1, k-1));
         }
