@@ -29,18 +29,18 @@ public:
 class Solution {
     vector<vector<int>>ans;
     void helper(int &n, int k, int start,vector<int>&temp){
-        if(start>n or k<0) return;
         if(k==0) ans.push_back(temp);
-        for(int i=start+1;i<=n-k+1;++i){
+        if(start>n or k<0) return;
+        for(int i=start;i<=n-k+1;++i){
             temp.push_back(i);
-            helper(n,k-1,i,temp);
+            helper(n,k-1,i+1,temp);
             temp.pop_back();
         }
     }
 public:
     vector<vector<int>> combine(int n, int k) {
         vector<int>temp;
-        helper(n,k,0,temp);
+        helper(n,k,1,temp);
         return ans;
     }
 };
