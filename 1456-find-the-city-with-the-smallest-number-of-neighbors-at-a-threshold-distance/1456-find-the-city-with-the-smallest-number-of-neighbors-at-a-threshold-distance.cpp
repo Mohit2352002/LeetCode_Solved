@@ -21,15 +21,15 @@ public:
                 }
             }
         }
-        vector<int>count(n,0);
         int idx=-1,maxi=INT_MAX;
         for(int i=0;i<n;++i){
+            int count=0;
             for(int j=0;j<n;++j){
-                if(i!=j and dp[i][j]<=dt) ++count[i];
+                if(i!=j and dp[i][j]<=dt) ++count;
             }
-            if(maxi>=count[i]){
+            if(maxi>=count){
                 idx=i;
-                maxi=count[i];
+                maxi=count;
             }
         }
         return idx;
