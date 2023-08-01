@@ -1,11 +1,14 @@
-//Floyd Warshall Algorithm
 static auto _ = [](){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
     return nullptr;
 }();
-/*
+
+
+
+
+//Floyd Warshall Algorithm
 class Solution {
 public:
     int findTheCity(int n, vector<vector<int>>& edges, int dt) {
@@ -18,6 +21,7 @@ public:
         for(int k=0;k<n;++k){
             for(int i=0;i<n;++i){
                 for(int j=0;j<n;++j){
+                    if(i==j or i==k or j==k) continue;
                     if(dp[i][k]!=INT_MAX and dp[k][j]!=INT_MAX)
                         dp[i][j]=min(dp[i][j],dp[i][k]+dp[k][j]);
                 }
@@ -36,7 +40,14 @@ public:
         }
         return idx;
     }
-};*/
+};
+
+
+
+
+
+/*
+//BFS on every node
 class Solution {
     int bfs(vector<vector<pair<int,int>>>adj, int source, int n, int thres){
         int count=0;
@@ -74,4 +85,44 @@ public:
         }
         return city;
     }
-};
+};*/
+
+
+
+
+
+/*
+//Bellman Ford Algorithm (TLE)
+class Solution {
+public:
+    int findTheCity(int n,vector<vector<int>>&edges, int thres){
+        vector<vector<int>>dist(n,vector<int>(n,1e8));
+        for(int source=0;source<n;++source){
+            dist[source][source]=0;
+            for(int itr=1;itr<n;++itr){
+                for(auto el:edges){
+                    if(dist[source][el[0]]+el[2]<dist[source][el[1]]){
+                        dist[source][el[1]]=dist[source][el[0]]+el[2];
+                    }
+                    if(dist[source][el[1]]+el[2]<dist[source][el[0]]){
+                        dist[source][el[0]]=dist[source][el[1]]+el[2];
+                    }
+                }
+            }
+        }
+        int minCity = -1;
+        int minCount = n;
+        for (int i = 0; i < n; i++) {
+            int curCount = 0;
+            for (int j = 0; j < n; j++) {
+                if (i == j) continue;
+                if (dist[i][j] <= thres) ++curCount;
+            }
+            if (curCount <= minCount) {
+                minCount = curCount;
+                minCity = i;
+            }
+        }
+        return minCity;
+    }
+};*/
