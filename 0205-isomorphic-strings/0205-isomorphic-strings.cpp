@@ -7,16 +7,12 @@ static auto _ = [](){
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        if(s.size()!=t.size()) return false;
         int n=s.size();
-        unordered_map<int,int>mp1,mp2;
+        int mp1[256]={0},mp2[256]={0};
         for(int i=0;i<n;++i){
-            if(mp1.find(s[i]-'a')!=mp1.end() and mp1[s[i]-'a']!=t[i]-'a') return false;
-            else mp1[s[i]-'a']=t[i]-'a';
-        }
-        for(int i=0;i<n;++i){
-            if(mp2.find(t[i]-'a')!=mp2.end() and mp2[t[i]-'a']!=s[i]-'a') return false;
-            else mp2[t[i]-'a']=s[i]-'a';
+            if(mp1[t[i]]!=mp2[s[i]]) return false;
+            mp1[t[i]]=i+1;
+            mp2[s[i]]=i+1;
         }
         return true;
     }
