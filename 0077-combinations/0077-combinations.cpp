@@ -7,7 +7,7 @@ static auto _ = [](){
 class Solution {
     vector<vector<int>>ans;
     void helper(int n, int k, int i,vector<int>&temp){
-        if(i>n or k<=0) return;
+        if(i>n or k<0) return;
         helper(n,k,i+1,temp);
         temp.push_back(i);
         if(k-1==0){
