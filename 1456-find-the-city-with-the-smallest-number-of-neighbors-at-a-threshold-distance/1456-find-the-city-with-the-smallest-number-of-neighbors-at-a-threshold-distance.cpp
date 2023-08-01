@@ -8,6 +8,7 @@ static auto _ = [](){
 
 
 
+/*
 //Floyd Warshall Algorithm
 class Solution {
 public:
@@ -40,7 +41,9 @@ public:
         }
         return idx;
     }
-};
+};//*/
+
+
 
 
 
@@ -91,8 +94,9 @@ public:
 
 
 
+
 /*
-//Bellman Ford Algorithm (TLE)
+//Bellman Ford Algorithm
 class Solution {
 public:
     int findTheCity(int n,vector<vector<int>>&edges, int thres){
@@ -101,7 +105,7 @@ public:
             dist[source][source]=0;
             for(int itr=1;itr<n;++itr){
                 for(auto el:edges){
-                    if(dist[source][el[0]]+el[2]<dist[source][el[1]]){
+                    if(dist[source][el[0]]+ el[2] < dist[source][el[1]]){
                         dist[source][el[1]]=dist[source][el[0]]+el[2];
                     }
                     if(dist[source][el[1]]+el[2]<dist[source][el[0]]){
@@ -125,4 +129,55 @@ public:
         }
         return minCity;
     }
-};*/
+};//*/
+
+
+
+
+
+
+
+///*
+//SPFA (shortest path fastest algoritm) Improved Bellman Ford Algorithm
+class Solution {
+public:
+    int findTheCity(int n,vector<vector<int>>&edges, int thres){
+        vector<vector<pair<int,int>>>adj(n);
+        for(auto el:edges){
+            adj[el[0]].push_back({el[1],el[2]});
+            adj[el[1]].push_back({el[0],el[2]});
+        }
+        vector<vector<int>>dist(n,vector<int>(n,1e8));
+        for(int source=0;source<n;++source){
+            dist[source][source]=0;
+            queue<int>q;
+            q.push(source);
+            while (!q.empty()) {
+            int u = q.front();
+            q.pop();
+            for (pair<int,int>next : adj[u]) {
+                int v = next.first;
+                int duv = next.second;
+                if (dist[source][v] > dist[source][u] + duv) {
+                    dist[source][v] = dist[source][u] + duv;
+                    q.push(v);
+                }
+            }
+        }
+        }
+        int minCity = -1;
+        int minCount = n;
+        for (int i = 0; i < n; i++) {
+            int curCount = 0;
+            for (int j = 0; j < n; j++) {
+                if (i == j) continue;
+                if (dist[i][j] <= thres) ++curCount;
+            }
+            if (curCount <= minCount) {
+                minCount = curCount;
+                minCity = i;
+            }
+        }
+        return minCity;
+    }
+};//*/
