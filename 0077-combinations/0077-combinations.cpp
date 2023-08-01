@@ -4,9 +4,9 @@ static auto _ = [](){
     cout.tie(nullptr);
     return nullptr;
 }();
-class Solution {
+/*class Solution {
     vector<vector<int>>ans;
-    void helper(int n, int k, int i,vector<int>&temp){
+    void helper(int &n, int k, int i,vector<int>&temp){
         if(n-i+1<k or i>n or k<0) return;
         helper(n,k,i+1,temp);
         temp.push_back(i);
@@ -22,6 +22,25 @@ public:
     vector<vector<int>> combine(int n, int k) {
         vector<int>temp;
         helper(n,k,1,temp);
+        return ans;
+    }
+};*/
+
+class Solution {
+    vector<vector<int>>ans;
+    void helper(int &n, int k, int start,vector<int>&temp){
+        if(start>n or k<0) return;
+        if(k==0) ans.push_back(temp);
+        for(int i=start+1;i<=n-k+1;++i){
+            temp.push_back(i);
+            helper(n,k-1,i,temp);
+            temp.pop_back();
+        }
+    }
+public:
+    vector<vector<int>> combine(int n, int k) {
+        vector<int>temp;
+        helper(n,k,0,temp);
         return ans;
     }
 };
