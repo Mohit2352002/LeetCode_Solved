@@ -7,11 +7,11 @@ static auto _ = [](){
 class Solution {
     vector<vector<int>>ans;
     void helper(vector<int>&nums, int i, int &n){
-        if(i==n-1){
+        if(i==n){
             ans.push_back(nums);
             return;
         }
-        for(int j=i;j<n;++j){
+        for(int j=i;j<=n;++j){
             swap(nums[i],nums[j]);
             helper(nums,i+1,n);
             swap(nums[i],nums[j]);
@@ -19,7 +19,7 @@ class Solution {
     }
 public:
     vector<vector<int>> permute(vector<int>& nums) {
-        int n=nums.size();
+        int n=nums.size()-1;
         helper(nums,0,n);
         return ans;
     }
