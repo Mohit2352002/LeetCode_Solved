@@ -12,7 +12,6 @@ class Solution {
         }
         helper(nums,i+1,n,ans);
         for(int j=i+1;j<=n;++j){
-            if(nums[i]==nums[j]) continue;
             swap(nums[i],nums[j]);
             helper(nums,i+1,n,ans);
             swap(nums[i],nums[j]);
