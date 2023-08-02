@@ -10,12 +10,12 @@ class Solution {
     set<vector<int>>s;
     int n;
     void helper(int start,vector<int>&nums){
-        if(start==n and s.find(temp)==s.end()) s.insert(temp);
+        if(s.find(temp)==s.end()) s.insert(temp);
         for(int i=start;i<n;++i){
             temp.push_back(nums[i]);
             helper(i+1,nums);
             temp.pop_back();
-            helper(i+1,nums);
+            //helper(i+1,nums);
         }
     }
 public:
