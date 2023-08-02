@@ -5,22 +5,22 @@ static auto _ = [](){
     return nullptr;
 }();
 class Solution {
-    vector<vector<int>>ans;
-    void helper(vector<int>&nums, int i, int &n){
+    void helper(vector<int>&nums, int i, int &n,vector<vector<int>>&ans){
         if(i==n){
             ans.push_back(nums);
             return;
         }
         for(int j=i;j<=n;++j){
             swap(nums[i],nums[j]);
-            helper(nums,i+1,n);
+            helper(nums,i+1,n,ans);
             swap(nums[i],nums[j]);
         }
     }
 public:
     vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>ans;
         int n=nums.size()-1;
-        helper(nums,0,n);
+        helper(nums,0,n,ans);
         return ans;
     }
 };
