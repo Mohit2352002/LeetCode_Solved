@@ -6,7 +6,7 @@ static auto _ = [](){
 }();
 class Solution {
     vector<vector<int>>ans;
-    void helper(vector<int>&nums, int i, int n){
+    void helper(vector<int>&nums, int i, int &n){
         if(i==n-1){
             ans.push_back(nums);
             return;
@@ -19,7 +19,8 @@ class Solution {
     }
 public:
     vector<vector<int>> permute(vector<int>& nums) {
-        helper(nums,0,nums.size());
+        int n=nums.size();
+        helper(nums,0,n);
         return ans;
     }
 };
