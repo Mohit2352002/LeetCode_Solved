@@ -10,7 +10,8 @@ class Solution {
             ans.push_back(nums);
             return;
         }
-        for(int j=i;j<=n;++j){
+        helper(nums,i+1,n,ans);
+        for(int j=i+1;j<=n;++j){
             swap(nums[i],nums[j]);
             helper(nums,i+1,n,ans);
             swap(nums[i],nums[j]);
