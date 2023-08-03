@@ -1,3 +1,9 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
 class Solution {
     unordered_map<int,vector<char>>mp;
     vector<string>ans;
