@@ -4,6 +4,7 @@ static auto _ = [](){
     cout.tie(nullptr);
     return nullptr;
 }();
+/*
 class Solution {
 public:
     int minKBitFlips(vector<int>& nums, int k) {
@@ -13,7 +14,7 @@ public:
         count=0;
         queue<int>q;
         for(int i=0;i<n;++i){
-            if(((nums[i]==0) and ((count&1)==0)) or ((nums[i]==1) and ((count&1)==1))){
+            if((nums[i]==(count&1)){
                 if(i+k>n) return -1;
                 ++count;
                 ++flips;
@@ -25,5 +26,27 @@ public:
             }
         }
         return flips;
+    }
+};//*/
+
+
+
+class Solution {
+public:
+    int minKBitFlips(vector<int>& nums, int k) {
+        int n=nums.size(),tot_flips=0,curr_flips=0;
+        for(int i=0;i<n;++i){
+            if(i>=k and nums[i-k]>1){
+                --curr_flips;
+                nums[i-k]-=2;
+            }
+            if((curr_flips&1)==nums[i]){
+                if((i+k)>n) return -1;
+                ++curr_flips;
+                ++tot_flips;
+                nums[i]+=2;
+            }
+        }
+        return tot_flips;
     }
 };
