@@ -44,14 +44,15 @@ class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         unordered_map<string,bool>dict;
-        int dp[301],n=s.size();
-        memset(dp,0,sizeof dp);
+        vector<bool>dp(301,false);
+        int n=s.size();
+        //memset(dp,0,sizeof dp);
         for(string word:wordDict) dict[word]=true;
-        dp[n]=1;
+        dp[n]=true;
         for(int i=n-1;i>=0;--i){
             for(int j=i;j<n;++j){
-                if(dict[s.substr(i,j-i+1)] and dp[j+1]){
-                    dp[i]=1;
+                if((dict[s.substr(i,j-i+1)]==true) and (dp[j+1]==true)){
+                    dp[i]=true;
                     break;
                 }
             }
