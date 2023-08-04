@@ -78,7 +78,7 @@ public:
 
 
 
-
+/*
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
@@ -106,5 +106,84 @@ public:
             checkedArr[startInd] = true;
         }
         return false;
+    }
+};//*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+struct TrieNode{
+    bool isWord;
+    unordered_map<char,TrieNode*>children;
+    TrieNode(): isWord(false),children(unordered_map<char,TrieNode*>()){}
+};
+class Solution{
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        TrieNode*root=new TrieNode();
+        for(string word:wordDict){
+            TrieNode*curr=root;
+            for(char ch:word){
+                if( curr->children.find(ch) == curr->children.end() ){
+                    curr->children[ch]=new TrieNode();
+                }
+                curr=curr->children[ch];
+            }
+            curr->isWord=true;
+        }
+        int n=s.size();
+        vector<bool>dp(n+1,false);
+        for(int i=0;i<n;++i){
+            if(i==0 or dp[i-1]){
+                TrieNode*curr=root;
+                for(int j=i;j<n;++j){
+                    if(curr->children.find(s[j])==curr->children.end()){
+                        break;
+                    }
+                    curr=curr->children[s[j]];
+                    if(curr->isWord==true) dp[j]=true;
+                }
+            }
+        }
+        return dp[n-1];
     }
 };
