@@ -5,47 +5,35 @@ static auto _ = [](){
     return nullptr;
 }();
 class Trie {
-    struct TrieNode{
-        bool isWord;
-        unordered_map<int,TrieNode*>children;
-        TrieNode():isWord(false),children(unordered_map<int,TrieNode*>()){}
-    };
-    TrieNode*root;
+    bool isWord=false;
+    Trie* children[26]={};
 public:
     Trie(){
-        root=new TrieNode();
     }
     
     void insert(string word) {
-        TrieNode* curr=root;
+        Trie* curr=this;
         for(char ch:word){
-            if(curr->children.find(ch) == curr->children.end() ){
-                curr->children[ch]=new TrieNode();
-            }
-            curr=curr->children[ch];
+            if(!curr->children[ch-'a']) curr->children[ch-'a']=new Trie();
+            curr=curr->children[ch-'a'];
         }
         curr->isWord=true;
     }
     
     bool search(string word) {
-        TrieNode* curr=root;
+        Trie* curr=this;
         for(char ch:word){
-            if(curr->children.find(ch) == curr->children.end() ){
-                return false;
-            }
-            curr=curr->children[ch];
+            if(!curr->children[ch-'a']) return false;
+            curr=curr->children[ch-'a'];
         }
-        if(curr->isWord) return true;
-        return false;
+        return curr->isWord;
     }
     
     bool startsWith(string prefix) {
-        TrieNode* curr=root;
+        Trie* curr=this;
         for(char ch:prefix){
-            if(curr->children.find(ch) == curr->children.end() ){
-                return false;
-            }
-            curr=curr->children[ch];
+            if(!curr->children[ch-'a']) return false;
+            curr=curr->children[ch-'a'];
         }
         return true;
     }
