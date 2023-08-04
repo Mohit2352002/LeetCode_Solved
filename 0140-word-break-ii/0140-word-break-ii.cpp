@@ -4,11 +4,6 @@ static auto _ = [](){
     cout.tie(nullptr);
     return nullptr;
 }();
-struct TrieNode{
-    bool isWord;
-    unordered_map<int,TrieNode*>children;
-    TrieNode(): isWord(false),children(unordered_map<int,TrieNode*>()){}
-};
 /*
 class Solution{
     void helper(string &s,  int start,string &curr){
@@ -43,6 +38,9 @@ public:
 
 
 
+
+
+/*
 class Solution{
     unordered_set<string>dict;
     unordered_map<int,vector<string>>dp;
@@ -56,9 +54,9 @@ class Solution{
             word+=s[i];
             if(dict.count(word)==0) continue;
             subPart=helper(s,i+1);
-            for(int j=0;j<subPart.size();++j){
-                if(subPart[j].size()==0) subPart[j]=word;
-                else subPart[j]=word+" "+subPart[j];
+            for(string &el:subPart){
+                if(el.size()==0) el=word;
+                else el=word+" "+el;
             }
             for(int j=0;j<subPart.size();++j) completePart.push_back(subPart[j]);
         }
@@ -69,5 +67,74 @@ public:
         int n=s.size();
         for(string &word:wordDict) dict.insert(word);
         return helper(s,0);
+    }
+};//*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+struct TrieNode{
+    bool isWord;
+    unordered_map<char,TrieNode*>children;
+    TrieNode(): isWord(false),children(unordered_map<char,TrieNode*>()){}
+};
+class Solution{
+    vector<string>ans;
+    TrieNode*root=new TrieNode();
+    void solver(string &s, string sent,int start, int &n){
+        if(start==n){
+            ans.push_back(sent);
+            return;
+        }
+        sent+=" ";
+        TrieNode*curr=root;
+        for(int j=start;j<n;++j){
+            if(curr->children.find(s[j])==curr->children.end()){
+                break;
+            }
+            curr=curr->children[s[j]];
+            if(curr->isWord==true) solver(s,sent+s.substr(start,j-start+1),j+1,n);
+        }
+    }
+public:
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        for(string word:wordDict){
+            TrieNode*curr=root;
+            for(char ch:word){
+                if( curr->children.find(ch) == curr->children.end() ){
+                    curr->children[ch]=new TrieNode();
+                }
+                curr=curr->children[ch];
+            }
+            curr->isWord=true;
+        }
+        int n=s.size();
+        TrieNode*curr=root;
+        for(int j=0;j<n;++j){
+            if(curr->children.find(s[j])==curr->children.end()){
+                break;
+            }
+            curr=curr->children[s[j]];
+            if(curr->isWord==true) solver(s,s.substr(0,j+1),j+1,n);
+        }
+        return ans;
     }
 };
