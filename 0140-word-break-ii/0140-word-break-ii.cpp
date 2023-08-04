@@ -26,18 +26,7 @@ class Solution{
     vector<string>ans;
 public:
     vector<string> wordBreak(string s, vector<string>& wordDict) {
-        TrieNode*root=new TrieNode();
-        for(string word:wordDict){
-            dict[word]=true;
-            TrieNode*curr=root;
-            for(char ch:word){
-                if( curr->children.find(ch-'a') == curr->children.end() ){
-                    curr->children[ch-'a']=new TrieNode();
-                }
-                curr=curr->children[ch-'a'];
-            }
-            curr->isWord=true;
-        }
+        for(string word:wordDict) dict[word]=true;
         int n=s.size();
         string temp="";
         helper(s,0,temp);
