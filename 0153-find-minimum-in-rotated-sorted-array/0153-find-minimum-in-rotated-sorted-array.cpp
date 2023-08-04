@@ -1,3 +1,11 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
+/*
 class Solution {
 public:
     int findMin(vector<int>& nums) {
@@ -12,5 +20,38 @@ public:
             else high=mid-1;
         }
         return nums[low];
+    }
+};*/
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    int findMin(vector<int> &num) {
+        int start=0,end=num.size()-1;
+        
+        while (start<end) {
+            if (num[start]<num[end])
+                return num[start];
+            
+            int mid = (start+end)/2;
+            
+            if (num[mid]>=num[start]) {
+                start = mid+1;
+            } else {
+                end = mid;
+            }
+        }
+        
+        return num[start];
     }
 };
