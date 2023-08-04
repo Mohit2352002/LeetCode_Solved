@@ -1,3 +1,9 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
 class Solution {
     bool valid(vector<int>&nums,int &speed, int rem_h,int &n){
         for(int i=0;i<n;++i){
@@ -12,9 +18,9 @@ public:
         int n=piles.size(),low=1,high=0;
         for(int i=0;i<n;++i) high=max(high,piles[i]);
         if(n==h) return high;
-        while(low<=high){
+        while(low<high){
             int mid=low+((high-low)>>1);
-            if(valid(piles,mid,h,n)) high=mid-1;
+            if(valid(piles,mid,h,n)) high=mid;
             else low=mid+1;
         }
         return low;
