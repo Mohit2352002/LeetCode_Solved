@@ -39,14 +39,13 @@ public:
 
 
 
-
+/*
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         unordered_map<string,bool>dict;
-        vector<bool>dp(301,false);
         int n=s.size();
-        //memset(dp,0,sizeof dp);
+        vector<bool>dp(n+1);
         for(string word:wordDict) dict[word]=true;
         dp[n]=true;
         for(int i=n-1;i>=0;--i){
@@ -58,5 +57,54 @@ public:
             }
         }
         return dp[0];
+    }
+};
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n = s.size();
+        queue<int> validIndQ;
+        vector<bool> checkedArr(n, false);
+        validIndQ.push(-1); // search from 0
+
+        while(!validIndQ.empty()) {
+            int startInd = validIndQ.front() + 1;
+            validIndQ.pop();
+            // already checked
+            if(checkedArr[startInd])
+                continue;
+            for(string _s : wordDict) {
+                // too long
+                if(startInd + _s.size() - 1 >= n)
+                    continue;
+                if(s.compare(startInd, _s.size(), _s) == 0) {
+                    validIndQ.push(startInd + _s.size() - 1);
+                    if(startInd + _s.size() - 1 == n-1)
+                        return true;
+                }
+            }
+            checkedArr[startInd] = true;
+        }
+        return false;
     }
 };
