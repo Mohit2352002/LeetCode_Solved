@@ -279,7 +279,7 @@ public:
         if(mp.find(key)!=mp.end()){
             node* existingNode=mp[key];
             deletenode(existingNode);
-            mp.erase(key);
+            //mp.erase(key);
         }
         else if(mp.size()==cap){
             mp.erase(tail->prev->key);
