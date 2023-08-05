@@ -17,13 +17,14 @@
 }();
 
 class Solution {
-    vector<TreeNode*>helper(int start, int end){
+    vector<TreeNode*>helper(int start,int end,map<pair<int,int>,vector<TreeNode*>>&memo){
         if(end<start) return {NULL};
         else if(end==start) return {new TreeNode(end)};
+        if(memo.find({start,end})!=memo.end()) return memo[{start, end}];
         vector<TreeNode*>ans;
         for(int i=start;i<=end;++i){
-            vector<TreeNode*>leftTrees=helper(start,i-1);
-            vector<TreeNode*>rightTrees=helper(i+1,end);
+            vector<TreeNode*>leftTrees=helper(start,i-1,memo);
+            vector<TreeNode*>rightTrees=helper(i+1,end,memo);
             for(TreeNode* &leftTree:leftTrees){
                 for(TreeNode* &rightTree:rightTrees){
                     TreeNode* root=new TreeNode(i,leftTree,rightTree);
@@ -31,10 +32,11 @@ class Solution {
                 }
             }
         }
-        return ans;
+        return memo[{start, end}] = ans;
     }
 public:
     vector<TreeNode*> generateTrees(int n) {
-        return helper(1,n);
+        map<pair<int, int>, vector<TreeNode*>>memo;
+        return helper(1,n,memo);
     }
 };
