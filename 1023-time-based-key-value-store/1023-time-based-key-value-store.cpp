@@ -19,13 +19,10 @@ public:
     
     string get(string key, int timestamp) {
         if(keyUpdates[key].empty()) return "";
-        else if(keyUpdates[key].lower_bound(timestamp)==keyUpdates[key].end()){
-            return timeMaper[*prev(keyUpdates[key].lower_bound(timestamp))][key];
-        }
         else if(*(keyUpdates[key].lower_bound(timestamp))==timestamp) 
             return timeMaper[*keyUpdates[key].lower_bound(timestamp)][key];
         else if(keyUpdates[key].lower_bound(timestamp)!=keyUpdates[key].begin())
-                return timeMaper[*prev(keyUpdates[key].lower_bound(timestamp))][key];
+            return timeMaper[*prev(keyUpdates[key].lower_bound(timestamp))][key];
         else return "";
     }
 };
