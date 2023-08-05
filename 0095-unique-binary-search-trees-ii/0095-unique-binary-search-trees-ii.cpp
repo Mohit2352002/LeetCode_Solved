@@ -32,11 +32,11 @@ class Solution {
                 }
             }
         }
-        return memo[{start, end}] = ans;
+        return memo[{start, end}]=ans;
     }
 public:
     vector<TreeNode*> generateTrees(int n) {
-        map<pair<int, int>, vector<TreeNode*>>memo;
+        map<pair<int,int>,vector<TreeNode*>>memo;
         return helper(1,n,memo);
     }
 };
