@@ -18,18 +18,13 @@
 
 class Solution {
     vector<TreeNode*>helper(int start, int end){
+        if(end<start) return {NULL};
+        else if(end==start) return {new TreeNode(end)};
         vector<TreeNode*>ans;
-        if(end<start){
-            ans.push_back(NULL);
-            return ans;
-        }else if(end==start){
-            ans.push_back(new TreeNode(end));
-            return ans;
-        }
         for(int i=start;i<=end;++i){
             vector<TreeNode*>leftTrees=helper(start,i-1);
             vector<TreeNode*>rightTrees=helper(i+1,end);
-            for(TreeNode*&leftTree:leftTrees){
+            for(TreeNode* &leftTree:leftTrees){
                 for(TreeNode* &rightTree:rightTrees){
                     TreeNode* root=new TreeNode(i,leftTree,rightTree);
                     ans.push_back(root);
