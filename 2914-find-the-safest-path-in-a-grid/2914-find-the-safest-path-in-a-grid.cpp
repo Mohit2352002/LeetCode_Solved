@@ -12,37 +12,37 @@ public:
         if(grid[0][0] or grid[n-1][n-1]) return 0;
         vector<pair<int,int>>dirs={{1,0},{0,1},{-1,0},{0,-1}};
         vector<vector<int>>dist(n,vector<int>(n,1e9));
-        queue<pair<int,int>>q;
+        vector<vector<bool>>vis(n,vector<bool>(n,0));
+        priority_queue <pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>>q;
         for(int i=0;i<n;++i){
             for(int j=0;j<n;++j){
                 if(grid[i][j]){
                     dist[i][j]=0;
-                    q.push({i,j});
+                    q.push({0,{i,j}});
+                    vis[i][j]=1;
                 }
             }
         }
         while(!q.empty()){
-            int i=q.front().first,j=q.front().second;
+            int d=q.top().first,i=q.top().second.first,j=q.top().second.second;
             q.pop();
             for(auto &dir:dirs){
                 int ni=i+dir.first,nj=j+dir.second;
-                if(ni>=0 and nj>=0 and nj<n and ni<n and dist[ni][nj]>dist[i][j]+1){
-                    q.push({ni,nj});
+                if(ni>=0 and nj>=0 and nj<n and ni<n and dist[ni][nj]>d+1){
+                    q.push({d+1,{ni,nj}});
                     dist[ni][nj]=dist[i][j]+1;
                 }
             }
         }
-        vector<vector<bool>>vis(n,vector<bool>(n,0));
         priority_queue<pair<int,pair<int,int>>>pq;
         pq.push({dist[0][0],{0,0}});
         vis[0][0]=1;
         while(!pq.empty()){
             int dis=pq.top().first,i=pq.top().second.first,j=pq.top().second.second;
             pq.pop();
-            //if(i==n-1 and j==n-1) return dis;
             for(auto &dir:dirs){
                 int ni=i+dir.first,nj=j+dir.second;
-                if(ni>=0 and nj>=0 and nj<n and ni<n and !vis[ni][nj] and !grid[ni][nj]){
+                if(ni>=0 and nj>=0 and nj<n and ni<n and !vis[ni][nj]){
                     if(ni==n-1 and nj==n-1) return min(dis,dist[ni][nj]);
                     vis[ni][nj]=1;
                     pq.push({min(dis,dist[ni][nj]),{ni,nj}});
