@@ -32,14 +32,14 @@ public:
                 }
             }
         }
-        vector<vector<int>>vis(n,vector<int>(n,0));
+        vector<vector<bool>>vis(n,vector<bool>(n,0));
         priority_queue<pair<int,pair<int,int>>>pq;
         pq.push({dist[0][0],{0,0}});
         vis[0][0]=1;
         while(!pq.empty()){
             int dis=pq.top().first,i=pq.top().second.first,j=pq.top().second.second;
             pq.pop();
-            if(i==n-1 and j==n-1) return dis;
+            //if(i==n-1 and j==n-1) return dis;
             for(auto &dir:dirs){
                 int ni=i+dir.first,nj=j+dir.second;
                 if(ni>=0 and nj>=0 and nj<n and ni<n and !vis[ni][nj] and !grid[ni][nj]){
