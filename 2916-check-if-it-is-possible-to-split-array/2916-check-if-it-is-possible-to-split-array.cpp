@@ -4,6 +4,23 @@ static auto _ = [](){
     cout.tie(nullptr);
     return nullptr;
 }();
+
+
+
+class Solution {
+public:
+    bool canSplitArray(vector<int>& A, int m) {
+        for (int i = 0; i < A.size() - 1; ++i)
+            if (A[i] + A[i + 1] >= m)
+                return true;
+        return A.size() < 3;
+    }
+};
+
+
+
+
+/*
 class Solution {
 public:
     int dp[101][101];
@@ -39,4 +56,4 @@ public:
         if (n == 2) return true;
         return solve(0, n - 1, nums, m);
     }
-};
+};*/
