@@ -36,18 +36,16 @@ public:
         priority_queue<pair<int,pair<int,int>>>pq;
         pq.push({dist[0][0],{0,0}});
         vis[0][0]=1;
-        int ans=1e9;
         while(!pq.empty()){
             int dis=pq.top().first,i=pq.top().second.first,j=pq.top().second.second;
             pq.pop();
-            ans=min(ans,dis);
-            if(i==n-1 and j==n-1) return ans;
+            if(i==n-1 and j==n-1) return dis;
             for(auto &dir:dirs){
                 int ni=i+dir.first,nj=j+dir.second;
                 if(ni>=0 and nj>=0 and nj<n and ni<n and !vis[ni][nj] and !grid[ni][nj]){
-                    if(ni==n-1 and nj==n-1) return min(ans,dist[ni][nj]);
+                    if(ni==n-1 and nj==n-1) return min(dis,dist[ni][nj]);
                     vis[ni][nj]=1;
-                    pq.push({dist[ni][nj],{ni,nj}});
+                    pq.push({min(dis,dist[ni][nj]),{ni,nj}});
                 }
             }
         }
