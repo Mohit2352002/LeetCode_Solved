@@ -29,6 +29,9 @@ public:
 };*/
 
 
+
+
+/*
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& nums, int target) {
@@ -41,5 +44,24 @@ public:
         }
         return false;
     }
+};*/
+
+
+
+
+
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& nums, int target) {
+        int n=nums[0].size(),m=nums.size(),j=n-1,i=0;
+        while(i<m and j>=0){
+            if(nums[i][j]>target) --j;
+            else if(nums[i][j]<target) ++i;
+            else return true;
+        }
+        return false;
+    }
 };
+
 
