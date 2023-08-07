@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+/*
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& nums, int target) {
@@ -19,4 +26,20 @@ public:
         }
         return false;
     }
+};*/
+
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& nums, int target) {
+        int n=nums[0].size(),m=nums.size(),low=0,hi=m*n-1;
+        while(low<=hi){
+            int mid=low+((hi-low)>>1);
+            if(nums[mid/n][mid%n]<target) low=mid+1;
+            else if(nums[mid/n][mid%n]>target) hi=mid-1;
+            else return true;
+        }
+        return false;
+    }
 };
+
