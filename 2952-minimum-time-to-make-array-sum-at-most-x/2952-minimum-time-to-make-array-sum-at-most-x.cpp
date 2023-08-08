@@ -4,6 +4,9 @@ static auto _ = [](){
     cout.tie(nullptr);
     return nullptr;
 }();
+
+
+/*
 class Solution {
     vector<vector<long long>>dp;
     vector<int>vec1,vec2;
@@ -31,6 +34,47 @@ public:
         for(int op=0;op<=n;++op){
             long long sum=sum1+(op*sum2);
             if(sum-(helper(op,n-1))<=x) return op;
+        }
+        return -1;
+    }
+};*/
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    int minimumTime(vector<int>& nums1, vector<int>& nums2, int x) {
+        int sum1 = accumulate(nums1.begin(), nums1.end(), 0);
+        if (sum1 <= x) return 0;
+        int sum2 = accumulate(nums2.begin(), nums2.end(), 0);
+        int n = nums1.size();
+        vector<pair<int, int>> arr(n);
+        for (int i = 0; i < n; i++) {
+            arr[i].first = nums1[i];
+            arr[i].second = nums2[i];
+        }
+        sort(arr.begin(), arr.end(), [](const auto& l, const auto& r) -> bool {
+            return l.second < r.second;
+        });
+        int dp[n][n + 1];
+        memset(dp, 0, sizeof(dp));
+        dp[0][1] = arr[0].first + arr[0].second;
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j <= i; j++) {
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - 1] + arr[i].first + arr[i].second * j);
+            }
+            dp[i][i + 1] = dp[i - 1][i] + arr[i].first + arr[i].second * (i + 1);
+        }
+        for (int j = 1; j <= n; j++) {
+            if (sum1 + sum2 * j - dp[n - 1][j] <= x) return j;
         }
         return -1;
     }
