@@ -16,10 +16,10 @@ public:
                 ++low;
                 --high;
             }else if(nums[mid]>=nums[low]){
-                if(nums[mid]>=target and nums[low]<=target) high=--mid;
+                if(nums[mid]>=target and target>=nums[low]) high=--mid;
                 else low=++mid;
             }else{
-                if(nums[mid]<=target and nums[high]>=target) low=++mid;
+                if(nums[mid]<=target and target<=nums[high]) low=++mid;
                 else high=--mid;
             }
         }
