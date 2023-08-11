@@ -5,7 +5,6 @@ static auto _ = [](){
     return nullptr;
 }();
 
-/*
 class Solution {
     int n;
     vector<vector<int>>dp;
@@ -23,10 +22,11 @@ public:
     int change(int amount, vector<int>& coins) {
         n=coins.size();
         dp.resize(amount+1,vector<int>(n+1,-1));
-        sort(coins.begin(),coins.end());
+        //sort(coins.begin(),coins.end());
         return helper(amount,n-1,coins);
     }
-};*/
+};
+/*
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
@@ -42,4 +42,4 @@ public:
 
         return dp[amount];
     }
-};
+};*/
