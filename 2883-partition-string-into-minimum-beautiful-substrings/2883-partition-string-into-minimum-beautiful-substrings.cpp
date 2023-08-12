@@ -5,7 +5,7 @@ static auto _ = [](){
     return nullptr;
 }();
 
-
+/*
 class Solution {
     int n;
     vector<int>dp;
@@ -35,5 +35,30 @@ public:
         int ans=helper(s,0);
         if(ans>=20) return -1;
         else return ans;
+    }
+};*/
+class Solution {
+    bool is5power(int num){
+        while(num!=1){
+            if(num%5!=0) return false; 
+            num/=5;
+        }
+        return true;
+    }
+    public:
+    int minimumBeautifulSubstrings(string s) {
+        if(s[0]=='0') return -1;
+        int n=s.size();
+        vector<int>dp(n+1,n+1);
+        dp[0]=0;
+        for(int i=0;i<n;++i){
+            if(s[i]=='0') continue;
+            int curr=0;
+            for(int j=i;j<n;++j){
+                curr=(curr<<1)+s[j]-'0';
+                if(is5power(curr)) dp[j+1]=min(dp[j+1],1+dp[i]);
+            }
+        }
+        return dp[n]>n ? -1 : dp[n];
     }
 };
