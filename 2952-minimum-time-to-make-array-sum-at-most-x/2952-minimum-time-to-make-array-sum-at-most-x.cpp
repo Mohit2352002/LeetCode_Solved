@@ -5,50 +5,7 @@ static auto _ = [](){
     return nullptr;
 }();
 
-
 /*
-class Solution {
-    vector<vector<long long>>dp;
-    vector<int>vec1,vec2;
-    long long helper(int oper, int last_idx){
-        if(oper==0 or last_idx<0) return 0;
-        if(dp[oper][last_idx]!=-1) return dp[oper][last_idx];
-        return dp[oper][last_idx]=max(helper(oper,last_idx-1),vec1[last_idx]+oper*vec2[last_idx]+helper(oper-1,last_idx-1));
-    }
-public:
-    int minimumTime(vector<int>& nums1, vector<int>& nums2, int x) {
-        vector<pair<int,int>>vec;
-        long long n=nums1.size(),sum2=0,sum1=0;
-        for(int i=0;i<n;++i){
-            sum1+=nums1[i];
-            sum2+=nums2[i];
-            vec.push_back({nums2[i],nums1[i]});
-        }
-        sort(vec.begin(),vec.end());
-        dp.resize(n+1,vector<long long>(n,-1));
-        vec1.resize(n),vec2.resize(n);
-        for(int i=0;i<n;++i){
-            vec1[i]=vec[i].second;
-            vec2[i]=vec[i].first;
-        }
-        for(int op=0;op<=n;++op){
-            long long sum=sum1+(op*sum2);
-            if(sum-(helper(op,n-1))<=x) return op;
-        }
-        return -1;
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
 class Solution {
 public:
     int minimumTime(vector<int>& nums1, vector<int>& nums2, int x) {
@@ -86,22 +43,21 @@ public:
 
 
 
+
+
 class Solution {
     vector<vector<int>>dp;
-    vector<int>vec1,vec2;
+    vector<pair<int,int>>vec;
     int helper(int op, int ind){
         if(op==0 or ind<0) return 0;
         if(dp[op][ind]!=-1) return dp[op][ind];
         int prev_max=helper(op,ind-1);
-        int taking_curr=vec1[ind]+(op*vec2[ind])+helper(op-1,ind-1);
+        int taking_curr=vec[ind].second+(op*vec[ind].first)+helper(op-1,ind-1);
         return dp[op][ind]=max(prev_max,taking_curr);
     }
 public:
     int minimumTime(vector<int>& nums1, vector<int>& nums2, int x) {
-        vector<pair<int,int>>vec;
         long long n=nums1.size(),sum2=0,sum1=0;
-        vec1.resize(n);
-        vec2.resize(n);
         for(int i=0;i<n;++i){
             sum1+=nums1[i];
             sum2+=nums2[i];
@@ -112,10 +68,6 @@ public:
             if(a.first==b.first) return a.second>b.second;
             return a.first<b.first;
         });
-        for(int i=0;i<n;++i){
-            vec1[i]=vec[i].second;
-            vec2[i]=vec[i].first;
-        }
         dp.resize(n+1,vector<int>(n,-1));
         for(int op=1;op<=n;++op){
             if(sum1+(op*sum2)-helper(op,n-1)<=x) return op;
