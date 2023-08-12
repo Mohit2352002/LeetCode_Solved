@@ -25,10 +25,10 @@ public:
         memset(dp, 0, sizeof(dp));
         dp[0][1] = arr[0].first + arr[0].second;
         for (int i = 1; i < n; i++) {
-            for (int op=1;op<=i;op++) {
+            for (int op=1;op<=i+1;op++) {
                 dp[i][op]=max(dp[i-1][op],dp[i-1][op-1]+arr[i].first+arr[i].second*op);
             }
-            dp[i][i+1] = max(dp[i-1][i+1],dp[i-1][i]+arr[i].first+arr[i].second*(i+1));
+            //dp[i][i+1] = max(dp[i-1][i+1],dp[i-1][i]+arr[i].first+arr[i].second*(i+1));
         }
         for (int j = 1; j <= n; j++) {
             if (sum1 + sum2 * j - dp[n - 1][j] <= x) return j;
