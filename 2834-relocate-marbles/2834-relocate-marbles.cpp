@@ -39,6 +39,7 @@ public:
         set<int>s(nums.begin(),nums.end());
         int n=moveFrom.size();
         for(int i=0;i<n;++i){
+            if(moveTo[i]==moveFrom[i]) continue;
             s.erase(moveFrom[i]);
             s.insert(moveTo[i]);
         }
