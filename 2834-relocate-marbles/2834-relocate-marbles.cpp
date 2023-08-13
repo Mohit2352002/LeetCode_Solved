@@ -5,6 +5,9 @@ static auto _ = [](){
     return nullptr;
 }();
 
+
+
+/*
 class Solution {
 public:
     vector<int> relocateMarbles(vector<int>& nums, vector<int>& moveFrom, vector<int>& moveTo) {
@@ -24,6 +27,22 @@ public:
             if(el.second) ans.push_back(el.first);
         }
         sort(ans.begin(),ans.end());
+        return ans;
+    }
+};*/
+
+
+
+class Solution {
+public:
+    vector<int> relocateMarbles(vector<int>& nums, vector<int>& moveFrom, vector<int>& moveTo) {
+        set<int>s(nums.begin(),nums.end());
+        int n=moveFrom.size();
+        for(int i=0;i<n;++i){
+            s.erase(moveFrom[i]);
+            s.insert(moveTo[i]);
+        }
+        vector<int>ans(s.begin(),s.end());
         return ans;
     }
 };
