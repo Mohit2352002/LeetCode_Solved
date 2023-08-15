@@ -38,7 +38,7 @@ public:
 
 
 
-
+/*
 class Solution {
 public:
     string longestPalindrome(string s) {
@@ -60,3 +60,40 @@ public:
         return s.substr(start,ansLen);
     }
 };
+*/
+
+
+
+
+
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n=s.size(),start=0,ansLen=1;
+        for(int i=0;i<n;++i){
+            //even substring
+            int high=i+1,low=i;
+            while(low>=0 and high<n and s[low]==s[high]){
+                if(high-low+1>ansLen){
+                    start=low;
+                    ansLen=high-low+1;
+                }
+                ++high;
+                --low;
+            }
+            //odd substring
+            high=i+1,low=i-1;
+            while(low>=0 and high<n and s[low]==s[high]){
+                if(high-low+1>ansLen){
+                    start=low;
+                    ansLen=high-low+1;
+                }
+                ++high;
+                --low;
+            }
+        }
+        return s.substr(start,ansLen);
+    }
+};
+
