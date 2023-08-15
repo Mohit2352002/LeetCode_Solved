@@ -13,7 +13,7 @@ public:
     int coinChange(vector<int>& coins, int amount) {
         if(amount==0) return 0;
         n=coins.size();
-        dp.resize(amount+1,vector<int>(n+1,-1));
+        dp.resize(amount+1,vector<int>(n,-1));
         int ans=helper(coins,amount,0);
         return ans==1e6?-1:ans;
     }
