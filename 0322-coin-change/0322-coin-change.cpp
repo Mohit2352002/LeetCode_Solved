@@ -36,12 +36,13 @@ class Solution{
         if(amount==0) return 0;
         int n=coins.size(),inf=amount+1;
         vector<int>dp(amount+1,inf);
+        sort(begin(coins), end(coins));
         dp[0]=0;
         for(int val=1;val<=amount;++val){
             for(int i=0;i<n;++i){
                 if(coins[i]<=val){
                     dp[val]=min(dp[val],1+dp[val-coins[i]]);
-                }
+                }else break;
             }
         }
         return dp[amount]>amount?-1:dp[amount];
