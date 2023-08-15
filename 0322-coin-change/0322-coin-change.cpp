@@ -34,15 +34,17 @@ class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
         int dp[++amount];
-        dp[0] = 0;
-        sort(begin(coins), end(coins));
-        for (int i = 1; i < amount; i++) {
-            dp[i] = amount;
-            for (int &c: coins) {
-                if(i-c<0) break;
-                if(dp[i - c]!=amount) dp[i]= min(dp[i], 1 + dp[i - c]);
+        dp[0]=0;
+        sort(begin(coins),end(coins));
+        for(int val=1;val<amount;++val){
+            dp[val]=amount;
+            for(int &coin:coins){
+                if(val<coin) break;
+                else{
+                    dp[val]=min(dp[val],1+dp[val-coin]);
+                }
             }
         }
-        return dp[--amount] == amount+1 ? -1 : dp[amount];
+        return dp[--amount]==amount+1?-1:dp[amount];
     }
 };
