@@ -30,21 +30,19 @@ public:
 
 
 
-class Solution{
-    public:
-    int coinChange(vector<int>&coins, int amount){
-        if(amount==0) return 0;
-        int n=coins.size(),inf=amount+1;
-        vector<int>dp(amount+1,inf);
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        int dp[++amount];
+        dp[0] = 0;
         sort(begin(coins), end(coins));
-        dp[0]=0;
-        for(int val=1;val<=amount;++val){
-            for(int i=0;i<n;++i){
-                if(coins[i]<=val){
-                    dp[val]=min(dp[val],1+dp[val-coins[i]]);
-                }else break;
+        for (int i = 1; i < amount; i++) {
+            dp[i] = amount;
+            for (int &c: coins) {
+                if(i-c<0) break;
+                if(dp[i - c]!=amount) dp[i]= min(dp[i], 1 + dp[i - c]);
             }
         }
-        return dp[amount]>amount?-1:dp[amount];
+        return dp[--amount] == amount+1 ? -1 : dp[amount];
     }
 };
