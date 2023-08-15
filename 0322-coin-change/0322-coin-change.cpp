@@ -5,9 +5,9 @@ static auto _ = [](){
     return nullptr;
 }();
 
-
+/*
 class Solution {
-    int n,ans=1e6;
+    int n;
     vector<vector<int>>dp;
     int helper(vector<int>&coins, int amount, int idx){
         if(amount==0) return 0;
@@ -24,5 +24,26 @@ public:
         dp.resize(amount+1,vector<int>(n,-1));
         int ans=helper(coins,amount,0);
         return ans==1e6?-1:ans;
+    }
+};*/
+
+
+
+
+class Solution{
+    public:
+    int coinChange(vector<int>&coins, int amount){
+        if(amount==0) return 0;
+        int n=coins.size(),inf=amount+1;
+        vector<int>dp(amount+1,inf);
+        dp[0]=0;
+        for(int val=1;val<=amount;++val){
+            for(int i=0;i<n;++i){
+                if(coins[i]<=val){
+                    dp[val]=min(dp[val],1+dp[val-coins[i]]);
+                }
+            }
+        }
+        return dp[amount]>amount?-1:dp[amount];
     }
 };
