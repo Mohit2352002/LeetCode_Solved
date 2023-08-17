@@ -24,6 +24,7 @@ public:
 
 
 
+/*
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -34,7 +35,7 @@ public:
                 int &ans=dp[day][buy];
                 if(day>=n) ans=0;
                 else{
-                    int ans1=dp[day+1][buy],ans2=0;
+                    int ans1=dp[day+1][buy],ans2;
                     if(buy) ans2=-prices[day]+dp[day+1][0];
                     else ans2=prices[day]+dp[day+2][1];
                     ans=max(ans1,ans2);
@@ -42,5 +43,23 @@ public:
             }
         }
         return dp[0][1];
+    }
+};*/
+
+
+
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size(),sell=0,prev_sell=0,buy=INT_MIN,prev_buy;
+        for(int price:prices){
+            prev_buy=buy;
+            buy=max(prev_sell-price,buy);
+            prev_sell=sell;
+            sell=max(prev_buy+price,sell);
+        }
+        return sell;
     }
 };
