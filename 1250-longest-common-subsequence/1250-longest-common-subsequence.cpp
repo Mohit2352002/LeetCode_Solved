@@ -54,7 +54,7 @@ public:
 
 
 
-
+/*
 class Solution {
 public:
     int longestCommonSubsequence(string a, string b) {
@@ -70,4 +70,29 @@ public:
         }
         return curr_dp[n];
     }
+};*/
+
+
+
+
+class Solution {
+public:
+    int longestCommonSubsequence(string a, string b) {
+        int m=a.size(),n=b.size();
+        if(m<n) return longestCommonSubsequence(b,a);
+        vector<int>prev_dp(n+1,0);
+        int ans=0,last=0;
+        for(int i=1;i<=m;++i){
+            last=ans=0;
+            for(int j=1;j<=n;++j){
+                if(a[i-1]==b[j-1]) ans=1+prev_dp[j-1];
+                else ans=max(prev_dp[j],last);
+                prev_dp[j-1]=last;
+                last=ans;
+            }
+            prev_dp[n]=ans;
+        }
+        return prev_dp[n];
+    }
 };
+
