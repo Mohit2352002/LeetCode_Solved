@@ -1,3 +1,11 @@
+static auto _ = [](){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
+
 class Solution {
     vector<int>dir={1,0,1};
     vector<vector<int>>dp;
