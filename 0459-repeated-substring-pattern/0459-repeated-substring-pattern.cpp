@@ -4,7 +4,7 @@
     cout.tie(nullptr);
     return nullptr;
 }();
-
+/*
 class Solution {
 public:
     bool repeatedSubstringPattern(string s) {
@@ -19,6 +19,17 @@ public:
                 if(temp==s) return true;
             }
         }
+        return false;
+    }
+};*/
+
+
+
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        string t=s+s;
+        if(t.substr(1,t.size()-2).find(s)!=-1) return true;
         return false;
     }
 };
