@@ -56,8 +56,8 @@ public:
             groupItemMap[group[item]].push_back(item);
         }
         for(int i=0;i<m;++i){
-            int curr_group=groupOrder[i];
-            for(int j=0;j<groupItemMap[curr_group].size();++j){
+            int curr_group=groupOrder[i],sz=groupItemMap[curr_group].size();
+            for(int j=0;j<sz;++j){
                 res.push_back(groupItemMap[curr_group][j]);
             }
         }
