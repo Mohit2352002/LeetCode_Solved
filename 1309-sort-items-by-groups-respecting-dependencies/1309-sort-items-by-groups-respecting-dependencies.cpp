@@ -17,7 +17,7 @@ class Solution {
             int curr=q.front();
             ans.push_back(curr);
             q.pop();
-            for(auto neighbr:adj[curr]){
+            for(auto &neighbr:adj[curr]){
                 --indegree[neighbr];
                 if(indegree[neighbr]==0) q.push(neighbr);
             }
@@ -35,7 +35,7 @@ public:
         vector<int>itemIndegree(n,0),groupIndegree(m,0);
         unordered_map<int,vector<int>>itemGraph,groupGraph;
         for(int i=0;i<n;++i){
-            for(int prev:beforeItems[i]){
+            for(int &prev:beforeItems[i]){
                 ++itemIndegree[i];
                 itemGraph[prev].push_back(i);
                 if(group[i]!=group[prev]){
@@ -52,7 +52,7 @@ public:
 
         vector<int>res;
         unordered_map<int,vector<int>>groupItemMap;
-        for(int item:itemOrder){
+        for(int &item:itemOrder){
             groupItemMap[group[item]].push_back(item);
         }
         for(int &curr_group:groupOrder){
