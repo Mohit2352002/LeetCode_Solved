@@ -10,12 +10,9 @@ public:
     string convertToTitle(int num) {
         string ans="";
         while(num){
+            --num;
             int first=num%26;
-            if(first==0){ 
-                first=26;
-                --num;
-            }
-            ans+=('A'+first-1);
+            ans+=('A'+first);
             num=num/26;
         }
         reverse(ans.begin(),ans.end());
