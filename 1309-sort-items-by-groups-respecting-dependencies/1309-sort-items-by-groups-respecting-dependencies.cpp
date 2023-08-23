@@ -6,7 +6,7 @@
 }();
 
 class Solution {
-    vector<int>topo(unordered_map<int,vector<int>>&adj,vector<int>&indegree){
+    vector<int>topoSort(unordered_map<int,vector<int>>&adj,vector<int>&indegree){
         queue<int>q;
         vector<int>ans;
         int n=indegree.size();
@@ -17,7 +17,7 @@ class Solution {
             int curr=q.front();
             ans.push_back(curr);
             q.pop();
-            for(auto &neighbr:adj[curr]){
+            for(auto neighbr:adj[curr]){
                 --indegree[neighbr];
                 if(indegree[neighbr]==0) q.push(neighbr);
             }
@@ -35,7 +35,7 @@ public:
         vector<int>itemIndegree(n,0),groupIndegree(m,0);
         unordered_map<int,vector<int>>itemGraph,groupGraph;
         for(int i=0;i<n;++i){
-            for(int &prev:beforeItems[i]){
+            for(int prev:beforeItems[i]){
                 ++itemIndegree[i];
                 itemGraph[prev].push_back(i);
                 if(group[i]!=group[prev]){
@@ -46,16 +46,16 @@ public:
         }
 
         //getting itemOrder and groupOrder using topological sorting
-        vector<int>itemOrder=topo(itemGraph,itemIndegree);
-        vector<int>groupOrder=topo(groupGraph,groupIndegree);
+        vector<int>itemOrder=topoSort(itemGraph,itemIndegree);
+        vector<int>groupOrder=topoSort(groupGraph,groupIndegree);
         if(itemOrder.empty() or groupOrder.empty()) return {};
 
         vector<int>res;
         unordered_map<int,vector<int>>groupItemMap;
-        for(int &item:itemOrder){
+        for(int item:itemOrder){
             groupItemMap[group[item]].push_back(item);
         }
-        for(int &curr_group:groupOrder){
+        for(int curr_group:groupOrder){
             int sz=groupItemMap[curr_group].size();
             for(int j=0;j<sz;++j){
                 res.push_back(groupItemMap[curr_group][j]);
