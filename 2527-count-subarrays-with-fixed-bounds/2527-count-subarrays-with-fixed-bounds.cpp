@@ -1,3 +1,4 @@
+/*
 // [1,2,3,4,7,5,2,5,6,7,8,1,2,3,4,5,7,2,3,4,5,7,8,1,2,3,4,5] mink=2 maxk=7
 // [2,3,4,7,5,2,5,6,7] [2,3,4,5,7,2,3,4,5,7] [2,3,4,5]
 // [0,1,2,3,4,5,6,7,8]
@@ -9,7 +10,6 @@
 class Solution{
   public:
   long long countSubarrays(vector<int>&nums,int minK, int maxK){
-    //if(minK==17167) return 118;
     long long ans=0;
     int n=nums.size(),lastmin=-1,lastmax=-1;
     vector<int>minkIndex(n),maxkIndex(n),out;
@@ -69,3 +69,21 @@ class Solution{
 //[0,1]
 //[1,1]
 //[1,1]
+*/
+
+
+
+class Solution{
+  public:
+  long long countSubarrays(vector<int>&nums,int minK, int maxK){
+    long long ans=0;
+    int cultInd=-1,maxkInd=-1,minkInd=-1,n=nums.size();
+    for(int i=0;i<n;++i){
+      if(nums[i]>maxK or nums[i]<minK) cultInd=i;
+      if(nums[i]==maxK) maxkInd=i;
+      if(nums[i]==minK) minkInd=i;
+      ans+=((min(minkInd,maxkInd)-cultInd)>0?(min(minkInd,maxkInd)-cultInd):0);
+    }
+    return ans;
+  }
+};
