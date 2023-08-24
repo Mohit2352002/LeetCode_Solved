@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 class Solution {
     int reverse(int n){
         int ans=0;
@@ -10,7 +17,7 @@ class Solution {
 public:
     bool sumOfNumberAndReverse(int num) {
         if(num==0) return true;
-        for(int i=0;i<num;++i){
+        for(int i=num/2;i<num;++i){
             if(i+reverse(i)==num) return true;
         }
         return false;
