@@ -7,14 +7,14 @@
 
 class Solution {
 public:
-    int findMaxK(vector<int>& nums) {
-        int ans=-1,n=nums.size();
-        unordered_set<int>us;
-        for(int i=0;i<n;++i){
-            if(us.find(-nums[i])!=us.end() and abs(nums[i])>ans){
-                ans=abs(nums[i]);
-            }
-            us.insert(nums[i]);
+    int findMaxK(const vector<int>& nums) {
+        bitset<1024> neg;
+        for (int num : nums) {
+            if (num < 0) neg[-num] = true;
+        }
+        int ans = -1;
+        for (int num : nums) {
+            if (num > ans && neg[num]) ans = num;
         }
         return ans;
     }
