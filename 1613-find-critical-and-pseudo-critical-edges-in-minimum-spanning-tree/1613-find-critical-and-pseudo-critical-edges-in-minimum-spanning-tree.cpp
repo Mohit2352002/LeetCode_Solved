@@ -1,100 +1,76 @@
-class Solution {
+ static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
+class DSU {
+    vector<int>rank;
+    vector<int>parent;
 public:
-    class UnionFind {
-    public:
-        vector<int> parent;
-        vector<int> size;
-        int maxSize;
-
-        UnionFind(int n) {
-            parent.resize(n);
-            size.resize(n, 1);
-            maxSize = 1;
-            for (int i = 0; i < n; i++) {
-                parent[i] = i;
-            }
+    void start(int n){
+        rank.resize(n,0);
+        parent.resize(n);
+        for(int i=0;i<n;++i) parent[i]=i;
+    }
+    int find(int x){
+        if(parent[x]==x) return x;
+        return parent[x]=find(parent[x]);
+    }
+    void Union(int x, int y){
+        int parx=parent[x],pary=parent[y];
+        if(parx==pary) return;
+        if(rank[parx]>rank[pary]) parent[pary]=parx;
+        else if(rank[parx]<rank[pary]) parent[parx]=pary;
+        else{
+            parent[pary]=parx;
+            ++rank[parx];
         }
+    }
+};
 
-        int find(int x) {
-            // Finds the root of x
-            if (x != parent[x]) {
-                parent[x] = find(parent[x]);
-            }
-            return parent[x];
+class Solution {
+    DSU ds;
+    int N;
+    int Krustal(vector<vector<int>>&vec, int skip_edge, int force_edge){
+        ds.start(N);
+        int sum=0,edgesConnected=0;
+        if(force_edge!=-1){
+            ds.Union(vec[force_edge][0],vec[force_edge][1]);
+            sum+=vec[force_edge][2];
+            ++edgesConnected;
         }
-
-        bool unite(int x, int y) {
-            // Connects x and y
-            int rootX = find(x);
-            int rootY = find(y);
-            if (rootX != rootY) {
-                if (size[rootX] < size[rootY]) {
-                    swap(rootX, rootY);
-                }
-                parent[rootY] = rootX;
-                size[rootX] += size[rootY];
-                maxSize = max(maxSize, size[rootX]);
-                return true;
-            }
-            return false;
+        for(int i=0;i<vec.size();++i){
+            if(i==skip_edge) continue;
+            int u=vec[i][0],v=vec[i][1],wt=vec[i][2];
+            int paru=ds.find(u),parv=ds.find(v);
+            if(paru==parv) continue;
+            ds.Union(u,v);
+            ++edgesConnected;
+            sum+=wt;
         }
-    };
-
+        if(edgesConnected!=N-1) return INT_MAX;
+        return sum;
+    }
+public:
     vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>>& edges) {
-        auto newEdges = edges;
-        // Add index to edges for tracking
-        int m = newEdges.size();
-        for (int i = 0; i < m; i++) {
-            newEdges[i].push_back(i);
-        }
-
-        // Sort edges based on weight
-        sort(newEdges.begin(), newEdges.end(), [](auto& a, auto& b) {
-            return a[2] < b[2];
+        int E=edges.size();
+        N=n;
+        for(int i=0;i<E;++i) edges[i].push_back(i);
+        sort(edges.begin(),edges.end(),[&](vector<int>&a,vector<int>&b){
+            return a[2]<b[2];
         });
-
-        // Find MST weight using union-find
-        UnionFind ufStd(n);
-        int stdWeight = 0;
-        for (const auto& edge : newEdges) {
-            if (ufStd.unite(edge[0], edge[1])) {
-                stdWeight += edge[2];
+        int mspVal=Krustal(edges,-1,-1);
+        vector<int>critical,pseudoCritical;
+        for(int i=0;i<E;++i){
+            if(Krustal(edges,i,-1)>mspVal){
+                //skipping ith edge and weight becomes higher than mspVals
+                //implies critical edge
+                critical.push_back(edges[i][3]);
             }
+            else if(Krustal(edges,-1,i)==mspVal) pseudoCritical.push_back(edges[i][3]);
         }
-
-        vector<vector<int>> results(2);
-        // Check each edge for critical and pseudo-critical
-        for (int i = 0; i < m; i++) {
-            UnionFind ufIgnore(n);
-            int ignoreWeight = 0;
-            for (int j = 0; j < m; j++) {
-                if (i != j && ufIgnore.unite(newEdges[j][0], newEdges[j][1])) {
-                    ignoreWeight += newEdges[j][2];
-                }
-            }
-
-            // If the graph is disconnected or the total weight is greater, 
-            // the edge is critical
-            if (ufIgnore.maxSize < n || ignoreWeight > stdWeight) {
-                results[0].push_back(newEdges[i][3]);
-            } else {
-                // Force this edge and calculate MST weight
-                UnionFind ufForce(n);
-                ufForce.unite(newEdges[i][0], newEdges[i][1]);
-                int forceWeight = newEdges[i][2];
-                for (int j = 0; j < m; j++) {
-                    if (i != j && ufForce.unite(newEdges[j][0], newEdges[j][1])) {
-                        forceWeight += newEdges[j][2];
-                    }
-                }
-
-                // If total weight is the same, the edge is pseudo-critical
-                if (forceWeight == stdWeight) {
-                    results[1].push_back(newEdges[i][3]);
-                }
-            }
-        }
-
-        return results;
+        return {critical, pseudoCritical};
     }
 };
