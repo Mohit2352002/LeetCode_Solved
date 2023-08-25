@@ -9,7 +9,7 @@ class Solution {
     vector<vector<string>>ans;
     vector<string>board;
     unordered_set<int>us_col,us_diag45,us_diag135;
-    void helper(int n, int row){
+    void helper(int &n, int row){
         if(row==n){
             ans.push_back(board);
             return;
@@ -28,12 +28,12 @@ class Solution {
             }
         }
     }
-    bool isValid(int row,int col,int n){
+    bool isValid(int &row,int &col,int &n){
         /*
         for(int i=0;i<n;++i){
 			// checking if there is a queen in the same column
 		    if(board[i][col]=='Q') return false; 
-		    // checking if there is a queen in the same diagonal (left to right)
+		    // checking if there is a queen in the same diagonal
 		    if(row-i>=0 && col-i>=0 && board[row-i][col-i]=='Q') return false;
 		    if(row-i>=0 && col+i<n && board[row-i][col+i]=='Q')  return false;
 	    }*/
