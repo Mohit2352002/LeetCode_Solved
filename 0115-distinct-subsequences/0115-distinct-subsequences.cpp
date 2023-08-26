@@ -28,6 +28,7 @@ public:
 };*/
 
 
+/*
 class Solution {
 public:
     int numDistinct(string s, string t) {
@@ -42,5 +43,24 @@ public:
             }
         }
         return dp[sz][n];
+    }
+};*/
+
+
+
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int n=s.size(),sz=t.size();
+        if(n<sz) return 0;
+        if(n==sz) return s==t;
+        vector<unsigned int>dp(sz+1,0);
+        dp[0]=1;
+        for(int i=1;i<=n;++i){
+            for(int j=sz;j>0;--j){
+                if(t[j-1]==s[i-1]) dp[j]=dp[j-1]+dp[j];
+            }
+        }
+        return dp[sz];
     }
 };
