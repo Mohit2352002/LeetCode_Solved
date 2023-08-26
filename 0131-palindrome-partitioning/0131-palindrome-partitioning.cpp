@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 class Solution {
     vector<vector<string>>ans;
     vector<string>curr_ans;
@@ -7,9 +14,7 @@ class Solution {
         if(dp[i][j]!=-1) return dp[i][j];
         int start=i,end=j;
         while(start<end){
-            if(s[start]!=s[end]) return dp[i][j]=0;
-            start++;
-            end--;
+            if(s[start++]!=s[end--]) return dp[i][j]=0;
         }
         return dp[i][j]=1;
     }
