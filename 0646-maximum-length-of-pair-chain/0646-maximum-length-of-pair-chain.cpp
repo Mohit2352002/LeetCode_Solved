@@ -1,15 +1,23 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 class Solution {
     int n;
     vector<int>dp;
     int helper(vector<vector<int>>& pairs, int i){
         if(i>=n) return 0;
-        int ans=0;
         if(dp[i]!=-1) return dp[i];
-        for(int j=i+1;j<n;++j){
-            if(pairs[i][1]<pairs[j][0]) ans=max(ans,1+helper(pairs,j));
-            ans=max(ans,helper(pairs,j));
+        int low=i+1,high=n-1;
+        while(low<=high){
+            int mid=(low+((high-low)>>1));
+            if(pairs[i][1]<pairs[mid][0]) high=mid-1;
+            else low=mid+1;
         }
-        return dp[i]=ans;
+        return dp[i]=max(1+helper(pairs,low),helper(pairs,i+1));
     }
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
@@ -19,8 +27,6 @@ public:
             if(a[0]==b[0]) return a[1]<b[1];
             return a[0]<b[0];
         });
-        int ans=0;
-        for(int i=0;i<n;++i) ans=max(ans,helper(pairs,i));
-        return ans+1;
+        return helper(pairs,0);
     }
 };
