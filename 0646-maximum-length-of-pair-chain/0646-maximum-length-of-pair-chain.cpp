@@ -34,6 +34,8 @@ public:
 };*/
 
 
+
+/*
 class Solution {
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
@@ -51,5 +53,26 @@ public:
             ans=max(ans,dp[i]);
         }
         return ans;
+    }
+};*/
+
+
+
+class Solution {
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        int n=pairs.size();
+        sort(pairs.begin(),pairs.end(),[&](vector<int>&a,vector<int>&b){
+            return a[1]<b[1];
+            if(a[1]==b[1]) return a[0]<b[0];
+        });
+        int res=1,end=pairs[0][1];
+        for(int i=1;i<n;++i){
+            if(pairs[i][0]>end){
+                ++res;
+                end=pairs[i][1];
+            }
+        }
+        return res;
     }
 };
