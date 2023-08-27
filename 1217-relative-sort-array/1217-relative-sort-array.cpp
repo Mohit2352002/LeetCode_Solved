@@ -11,14 +11,12 @@ public:
         map<int,int>freq;
         for(int &el:arr1) ++freq[el];
         int i=0;
-        vector<int>ans(arr1.size());
         for(int &el:arr2){
-            while(freq[el]--) ans[i++]=el;
+            while(freq[el]--) arr1[i++]=el;
         }
         for(auto el:freq){
-            if(el.second==0) continue;
-            while(el.second-->0) ans[i++]=el.first;
+            while(el.second-->0) arr1[i++]=el.first;
         }
-        return ans;
+        return arr1;
     }
 };
