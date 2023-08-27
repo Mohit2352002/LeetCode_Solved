@@ -13,13 +13,21 @@ class Solution {
         if(jump<=0 or jump>(nums[n-1]-nums[i])) return false;
         if(dp[i][jump]!=-1) return dp[i][jump];
         int ans=false;
-        for(int j=i+1;j<n;++j){
-            if(nums[j]==(nums[i]+jump)){
-                ans=(ans || helper(nums,j,jump));
-                ans=(ans || helper(nums,j,jump+1));
-                ans=(ans || helper(nums,j,jump-1));
+        int low=i+1,high=n-1,flag=0;
+        while(low<=high){
+            int mid=(low+((high-low)>>1));
+            if(nums[mid]==(nums[i]+jump)){
+                low=mid;
+                flag=1;
                 break;
             }
+            else if(nums[mid]>(nums[i]+jump)) high=mid-1;
+            else low=mid+1;
+        }
+        if(flag){
+            ans=(ans || helper(nums,low,jump));
+            ans=(ans || helper(nums,low,jump+1));
+            ans=(ans || helper(nums,low,jump-1));
         }
         return dp[i][jump]=ans;
     }
