@@ -44,6 +44,66 @@ public:
 
 
 
+
+/*
+class Solution {
+    int dp[2001][2001];
+    bool find(vector<int> &stones, int i, int k){
+        if(i==stones.size()-1) return true;
+        if(i>=stones.size()) return false;
+        if(dp[i][k]!=-1) return dp[i][k]; 
+        bool res = false;
+        for(int next_jump=k-1;next_jump<=k+1;next_jump++){
+            if(next_jump>0){
+                int in=lower_bound(stones.begin(),stones.end(),stones[i]+next_jump)-stones.begin();
+                if(in==stones.size() || stones[in]!=stones[i]+next_jump) continue;
+                res=res||find(stones,in,next_jump);
+            }
+        }
+        return dp[i][k]=res;
+    }
+public:  
+    bool canCross(vector<int>& stones) {
+        memset(dp,-1,sizeof(dp));
+        return find(stones, 0, 0);
+    }
+};
+*/
+
+
+
+
+
+/*
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        int N = stones.size();
+        vector<vector<bool>> dp(N, vector<bool> (N+1, false));
+        dp[0][1] = true;
+        
+        for(int i = 1; i < N; ++i){
+            for(int j = 0; j < i; ++j){
+                int diff = stones[i] - stones[j];
+                if(diff > N || !dp[j][diff]) 
+                    continue;
+                
+                if(i == N - 1) 
+                    return true;
+                
+                dp[i][diff] = true;
+                if(diff - 1 >= 0) dp[i][diff - 1] = true;
+                if(diff + 1 <= N) dp[i][diff + 1] = true;
+            }
+        }
+        return false;
+    }
+};
+*/
+
+
+
+
 class Solution {
 public:
     bool canCross(std::vector<int>& stones) {
