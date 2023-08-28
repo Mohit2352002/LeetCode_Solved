@@ -13,8 +13,7 @@ public:
     
     void push(int x) {
 			q.push(x);
-			int n=q.size()-1;
-			while(n--){
+			for(int i=q.size()-1;i>0;--i){
 				q.push(q.front());
 				q.pop();
 			}
@@ -33,7 +32,7 @@ public:
     }
     
     bool empty() {
-			return q.empty();
+			return q.size()==0;
     }
 };
 
