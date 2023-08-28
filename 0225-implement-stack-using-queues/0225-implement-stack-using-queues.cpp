@@ -1,36 +1,39 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 class MyStack {
+	queue<int>q;
 public:
-    /** Initialize your data structure here. */
-    queue<int> q1;
-    queue<int> q2;
     MyStack() {
-        
     }
     
-    /** Push element x onto stack. */
     void push(int x) {
-        q2.push(x);
-        while(!q1.empty()){
-            q2.push(q1.front());    q1.pop();
-        }
-        swap(q1, q2);
+			q.push(x);
+			int n=q.size()-1;
+			while(n--){
+				q.push(q.front());
+				q.pop();
+			}
     }
     
-    /** Removes the element on top of the stack and returns that element. */
     int pop() {
-        int result = top();
-        q1.pop();
-        return result;
+			// if(q.empty()) return -1;
+			int tp=q.front();
+			q.pop();
+			return tp;
     }
     
-    /** Get the top element. */
     int top() {
-        return q1.front();
+		// if(q.empty()) return -1;
+			return q.front();
     }
     
-    /** Returns whether the stack is empty. */
     bool empty() {
-        return q1.empty();
+			return q.empty();
     }
 };
 
