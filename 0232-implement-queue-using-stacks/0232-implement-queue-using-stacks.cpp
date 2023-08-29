@@ -5,6 +5,9 @@ static auto _ = [](){
     return nullptr;
 }();
 
+
+
+/*
 class MyQueue {
     stack<int>input,output;
 public:
@@ -43,6 +46,47 @@ public:
     
     bool empty() {
         return (output.size()==0 and input.size()==0);
+    }
+};*/
+
+
+
+
+class MyQueue {
+    stack<int>s1,s2;
+public:
+    MyQueue() {
+    }
+    
+    void push(int x) {
+        if(s1.empty()) {
+            s1.push(x);
+            return;
+        }else{
+            while(!s1.empty()){
+                s2.push(s1.top());
+                s1.pop();
+            }
+            s1.push(x);
+            while(!s2.empty()){
+                s1.push(s2.top());
+                s2.pop();
+            }
+        }
+    }
+    
+    int pop() {
+        int x=s1.top();
+        s1.pop();
+        return x;
+    }
+    
+    int peek() {
+        return s1.top();
+    }
+    
+    bool empty() {
+        return s1.size()==0;
     }
 };
 
