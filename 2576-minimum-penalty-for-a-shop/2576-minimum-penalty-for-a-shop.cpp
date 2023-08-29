@@ -5,6 +5,9 @@ static auto _ = [](){
     return nullptr;
 }();
 
+
+
+/*
 class Solution {
 public:
     int bestClosingTime(string s) {
@@ -27,5 +30,24 @@ public:
             }
         }
         return closing;
+    }
+};
+*/
+
+class Solution {
+public:
+    int bestClosingTime(string s) {
+        int n=s.size(), currPenalty=0,minPenalty,earliestHour=0;
+        for(int i=0;i<n;++i) if(s[i]=='Y') ++currPenalty;
+        minPenalty=currPenalty;
+        for(int i=0;i<n;++i){
+            if(s[i]=='Y') --currPenalty;
+            else ++currPenalty;
+            if(currPenalty<minPenalty){
+                earliestHour=i+1;
+                minPenalty=currPenalty;
+            }
+        }
+        return earliestHour;
     }
 };
