@@ -34,6 +34,11 @@ public:
 };
 */
 
+
+
+
+
+/*
 class Solution {
 public:
     int bestClosingTime(string s) {
@@ -49,5 +54,24 @@ public:
             }
         }
         return earliestHour;
+    }
+};*/
+
+
+
+
+
+class Solution {
+public:
+    int bestClosingTime(string &s) {
+        int n=s.size(),currPenalty=0,minPenalty=0,rightTime=-1;
+        for(int i=0;i<n;++i){
+            currPenalty+=(s[i]=='Y')?-1:1;
+            if(minPenalty>currPenalty){
+                rightTime=i;
+                minPenalty=currPenalty;
+            }
+        }
+        return rightTime+1;
     }
 };
