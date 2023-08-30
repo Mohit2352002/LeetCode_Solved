@@ -54,12 +54,12 @@ class Solution{
         ans=0;
         int start=0,end=(isSmaller?9:(s[ind]-'0'));
         for(int i=start;i<=end;++i){
-            // bool new_isSmaller = isSmaller || i != end;
-            // bool new_isStarted = isStarted || i != 0;
+            bool new_isSmaller = isSmaller || i != end;
+            bool new_isStarted = isStarted || i != 0;
             // int newOdd = odd + (new_isStarted && i%2 != 0);
             // int newEven = even + (new_isStarted && i%2 == 0);
-            bool new_isStarted=(!isStarted and i==0)?false:true;
-            bool new_isSmaller=(!isSmaller and i==end)?false:true;
+            //bool new_isStarted=(!isStarted and i==0)?false:true;
+            //bool new_isSmaller=(!isSmaller and i==end)?false:true;
             int newOdd=odd,newEven=even;
             if(new_isStarted){
                 if(i&1) ++newOdd;
