@@ -58,8 +58,6 @@ class Solution{
             // bool new_isStarted = isStarted || i != 0;
             // int newOdd = odd + (new_isStarted && i%2 != 0);
             // int newEven = even + (new_isStarted && i%2 == 0);
-            // int newRem=((10*rem)+i)%k;
-            // ans+=solver(s,k,new_isStarted,new_isSmaller,ind+1,newOdd,newEven,newRem);
             bool new_isStarted=(!isStarted and i==0)?false:true;
             bool new_isSmaller=(!isSmaller and i==end)?false:true;
             int newOdd=odd,newEven=even;
