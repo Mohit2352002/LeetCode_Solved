@@ -29,8 +29,7 @@ class Solution {
         int start=0,end=(isSmaller?9:(s[ind]-'0'));
         for(int i=start;i<=end;++i){
             bool new_isSmaller=(isSmaller || (i!=end));
-            int newSum=sum+i;
-            ans=(ans+solver(s,minSum,maxSum,new_isSmaller,ind+1,newSum))%MOD;
+            ans=(ans+solver(s,minSum,maxSum,new_isSmaller,ind+1,sum+i))%MOD;
         }
         return ans;
     }
