@@ -6,8 +6,8 @@ static auto _ = [](){
 }();
 
 class Solution {
-    const int MOD = 1e9+7;
-    int dp[2][23][401];
+    int MOD = 1e9+7;
+    int dp[2][23][201];
     string subtractOne(string s){
         int n=s.size();
         if(n==1 and (s[0]=='0' or s[0]=='1')) return "0";
@@ -20,7 +20,7 @@ class Solution {
         }
         return s;
     }
-    int solver(string s, int minSum, int maxSum, bool isSmaller, int ind, int sum){
+    int solver(const string &s, int &minSum, int &maxSum, bool isSmaller, int ind, int sum){
         if(ind==s.size()) return (sum<=maxSum and sum>=minSum);
         int &ans=dp[isSmaller][ind][sum];
         if(ans!=-1) return ans;
