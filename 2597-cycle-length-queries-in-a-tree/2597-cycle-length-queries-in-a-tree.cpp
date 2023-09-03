@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 class Solution {
     int length(int x){
         int d=0;
