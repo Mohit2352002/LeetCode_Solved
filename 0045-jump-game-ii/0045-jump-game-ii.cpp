@@ -21,7 +21,7 @@ public:
 
 
 
-
+/*
 class Solution {
 public:
     int jump(vector<int>& nums) {
@@ -44,8 +44,7 @@ public:
         }
         return ans;
     }
-};
-
+};*/
 
 
 
@@ -134,3 +133,29 @@ public:
         return helper(0,nums,dp);
     }
 };*/
+
+
+
+
+
+
+
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        std::ios_base::sync_with_stdio(false);
+        std::cout.tie(nullptr);
+        std::cin.tie(nullptr);
+        int n = size(nums);
+        if(n<3) return n-1;
+        vector<int> dp(n+1, 10001);
+        dp[0]=0;
+        for(int i=0;i<n-1;++i){
+            int start=i,end=min(n-1,i+nums[i]);
+            for(int j=start+1;j<=end;++j){
+                dp[j]=min(dp[j],1+dp[start]);
+            }
+        }
+        return dp[n-1];
+    }
+};
