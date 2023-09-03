@@ -21,6 +21,7 @@ public:
 
 
 
+
 class Solution {
 public:
     int jump(vector<int>& nums) {
@@ -29,17 +30,17 @@ public:
         std::cin.tie(nullptr);
         int ans=1,curr_max=nums[0],net_max=nums[0],n=nums.size();
         if(n==1) return 0;
-        for(int i=1;i<=n-1;++i){
-            if(curr_max>=n-1) break;
-            if(net_max>=n-1){
-                ++ans;
-                break;
-            }
+        if(net_max>=n-1) return ans;
+        for(int i=1;i<n-1;++i){
             if(i>curr_max){
                 ++ans;
                 curr_max=net_max;
             }
             net_max=max(i+nums[i],net_max);
+            if(net_max>=n-1){
+                ++ans;
+                break;
+            }
         }
         return ans;
     }
