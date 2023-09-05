@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 /*
 // Definition for a Node.
 class Node {
@@ -14,6 +21,46 @@ public:
 };
 */
 
+
+
+
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if(!head) return NULL;
+        Node* temp=head;
+        while(temp){
+            Node* fast= new Node(temp->val);
+            fast->next=temp->next;
+            temp->next=fast;
+            temp=temp->next->next;
+        }
+        temp=head;
+        while(temp){
+            if(temp->random) temp->next->random=temp->random->next;
+            temp=temp->next->next;
+        }
+        temp=head;
+        Node* ans=new Node(0);
+        ans->next=head->next;
+        while(temp){
+            if(temp->next->next){
+                Node* temp2=temp->next->next;
+                temp->next->next=temp2->next;
+                temp->next=temp2;
+                temp=temp->next;
+            }else break;
+        }
+        temp->next=NULL;
+        return ans->next;
+    }
+};
+
+
+
+
+
+/*
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
