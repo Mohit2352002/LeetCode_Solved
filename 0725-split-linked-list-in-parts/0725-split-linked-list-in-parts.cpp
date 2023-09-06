@@ -1,3 +1,11 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -18,15 +26,15 @@ public:
             ++n;
             temp=temp->next;
         }
-        if(k>=n){
-            while(i!=n){
-                ListNode*temp=head;
-                head=head->next;
-                temp->next=NULL;
-                ans[i++]=temp;
-            }
-        }
-        else{
+        // if(k>=n){
+        //     while(i!=n){
+        //         ListNode*temp=head;
+        //         head=head->next;
+        //         temp->next=NULL;
+        //         ans[i++]=temp;
+        //     }
+        // }
+        // else{
             int rem=n%k,nec=n/k;
             while(head){
                 int el=0;
@@ -44,7 +52,7 @@ public:
                 }
                 temp->next=NULL;
             }
-        }
+        // }
         return ans;
     }
 };
