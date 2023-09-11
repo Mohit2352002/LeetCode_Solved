@@ -1,3 +1,17 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
+
+
+
+
+
+/*
+
 class Solution {
 private:
     int MOD = 1e9 + 7;
@@ -40,5 +54,23 @@ public:
     int countOrders(int n) {
         memo = vector<vector<int>> (n + 1, vector<int>(n + 1, 0));
         return totalWays(n, n);
+    }
+};*/
+
+
+
+
+class Solution{
+public:
+    int countOrders(int n) {
+        int mod=1e9+7;
+        long long res=1;
+        for(int i=2;i<=n;++i){
+            int spaces=2*i-1;
+            long long waysToFill=(1ll*spaces*(spaces+1))/2;
+            res=(1ll*res*waysToFill);
+            res%=mod;
+        }
+        return (int)res;
     }
 };
