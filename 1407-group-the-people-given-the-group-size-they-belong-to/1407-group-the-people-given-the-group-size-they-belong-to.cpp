@@ -9,7 +9,7 @@ static auto _ = [](){
 class Solution {
 public:
     vector<vector<int>> groupThePeople(vector<int>& groupSizes) {
-        map<int,vector<int>>mp;
+        unordered_map<int,vector<int>>mp;
         int n=groupSizes.size();
         for(int i=0;i<n;++i) mp[groupSizes[i]].push_back(i);
         vector<vector<int>>ans;
