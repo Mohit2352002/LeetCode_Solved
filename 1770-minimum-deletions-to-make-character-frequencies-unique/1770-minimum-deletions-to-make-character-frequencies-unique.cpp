@@ -14,24 +14,19 @@ public:
             ++freq[s[i]-'a'];
         }
         int ans=0;
-        vector<int>mp(n+1,-1);
+        unordered_set<int>used;
         for(int i=0;i<26;++i){
             if(freq[i]==0) continue;
-            if(mp[freq[i]]==-1){
-                mp[freq[i]]=i;
+            if(used.find(freq[i])==used.end()){
+                used.insert(freq[i]);
             }else{
-                while(freq[i]>0 and mp[freq[i]]!=-1){
+                while(freq[i]>0 and used.find(freq[i])!=used.end()){
                     ++ans;
                     --freq[i];
                 }
-                if(freq[i]>0) mp[freq[i]]=i;
+                if(freq[i]>0) used.insert(freq[i]);
             }
         }
         return ans;
     }
 };
-//"aaabbbcc"
-//a->3
-//b->3
-//c->2
-//mp:   3->0.  2->1.  
