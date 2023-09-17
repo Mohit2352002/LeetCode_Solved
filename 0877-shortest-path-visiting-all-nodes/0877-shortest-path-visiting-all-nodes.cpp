@@ -23,7 +23,7 @@ public:
             while(sz--){
                 auto [node,mask]=q.front();
                 q.pop();
-                for(const int &nghbr:graph[node]){
+                for(int &nghbr:graph[node]){
                     int newMask=mask|(1<<nghbr);
                     if(newMask==finalMask) return path;
                     if(!vis[nghbr][newMask]){
