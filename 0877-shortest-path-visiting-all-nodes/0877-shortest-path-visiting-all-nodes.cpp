@@ -15,7 +15,7 @@ public:
         vector<vector<bool>>vis(n,vector<bool>(finalMask,false)) ;
         for(int i=0;i<n;++i){
             q.push({i,1<<i});
-            vis[i][1<<i]=true;
+            //vis[i][1<<i]=true;
         }
         int path=0;
         while(!q.empty()){
