@@ -12,7 +12,7 @@ public:
         if(n==1 or n==0) return 0;
         int finalMask=(1<<n)-1;
         queue<pair<int,int>>q;//pair of {node,mask}
-        vector<vector<bool>>vis(n,vector<bool>(finalMask, false)) ;
+        vector<vector<bool>>vis(n,vector<bool>(finalMask,false)) ;
         for(int i=0;i<n;++i){
             q.push({i,1<<i});
         }
