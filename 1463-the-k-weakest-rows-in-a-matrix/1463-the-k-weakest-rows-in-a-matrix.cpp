@@ -51,28 +51,28 @@ public:
 // };
 
 class Solution {
-    int calculateSoldierCount(vector<int>&v) {
-        int l=0, h=v.size()-1;
-        while(l<=h) {
-            int mid=l+((h-l)>>1);
-            if(v[mid]==0) h=mid-1;
-            else l=mid+1;
-        }
-        return l;
-    }
+    // int calculateSoldierCount(vector<int>&v) {
+    //     int l=0, h=v.size()-1;
+    //     while(l<=h) {
+    //         int mid=l+((h-l)>>1);
+    //         if(v[mid]==0) h=mid-1;
+    //         else l=mid+1;
+    //     }
+    //     return l;
+    // }
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
-        priority_queue<pair<int,int>> max_heap;
+        priority_queue<pair<int,int>> pq;
         for(int i=0;i<mat.size();++i){
-            max_heap.push({calculateSoldierCount(mat[i]),i});
-            if(max_heap.size()>k){
-                max_heap.pop();
-            }
+            int val=lower_bound(mat[i].begin(),mat[i].end(),0,greater<int>())-mat[i].begin();
+            pq.push({val,i});
+            //pq.push({calculateSoldierCount(mat[i]),i});
+            if(pq.size()>k) pq.pop();
         }
         vector<int>ans(k);
-        while(max_heap.size()){
-            ans[--k]=max_heap.top().second;
-            max_heap.pop();
+        while(pq.size()){
+            ans[--k]=pq.top().second;
+            pq.pop();
         }
         return ans;
     }
