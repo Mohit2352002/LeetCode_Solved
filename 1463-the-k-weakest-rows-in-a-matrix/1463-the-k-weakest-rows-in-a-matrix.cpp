@@ -63,10 +63,11 @@ class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         priority_queue<pair<int,int>> pq;
-        for(int i=0;i<mat.size();++i){
+        int n=mat.size();
+        for(int i=0;i<n;++i){
             int val=lower_bound(mat[i].begin(),mat[i].end(),0,greater<int>())-mat[i].begin();
             pq.push({val,i});
-            //pq.push({calculateSoldierCount(mat[i]),i});
+            //pq.push({calculateSoldierCount(mat[i]),i});//binary search to get soldiers
             if(pq.size()>k) pq.pop();
         }
         vector<int>ans(k);
