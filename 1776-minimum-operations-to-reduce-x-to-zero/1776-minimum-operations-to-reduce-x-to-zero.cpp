@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 class Solution {
    public:
     int minOperations(vector<int>& nums, int x) {
