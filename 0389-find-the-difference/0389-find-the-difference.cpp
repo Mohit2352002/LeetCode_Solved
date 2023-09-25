@@ -7,14 +7,11 @@ static auto _ = [](){
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        int n=t.size();
-        if(n==1) return t[0];
-        int freq[26]={};
+        int n=s.size();
+        if(n==0) return t[0];
         for(int i=0;i<n;++i){
-            ++freq[t[i]-'a'];
-            if(i!=(n-1)) --freq[s[i]-'a'];
+            t[i+1]+=(t[i]-s[i]);
         }
-        for(int i=0;i<26;++i) if(freq[i]>0) return 'a'+i;
-        return 'a';
+        return t[n];
     }
 };
