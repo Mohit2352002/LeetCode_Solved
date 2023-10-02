@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 class Solution {
 public:
     bool winnerOfGame(string colors) {
@@ -6,12 +13,16 @@ public:
         int countA=0,countB=0,contA=0,contB=0;
         for(int i=0;i<n;++i){
             if(colors[i]=='A'){
-                countB+=max(0,contB-2);
-                contB=0;
+                if(contB>0){
+                    countB+=max(0,contB-2);
+                    contB=0;
+                }
                 ++contA;
             }else{
-                countA+=max(0,contA-2);
-                contA=0;
+                if(contA>0){
+                    countA+=max(0,contA-2);
+                    contA=0;
+                }
                 ++contB;
             }
         }
