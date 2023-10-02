@@ -29,5 +29,15 @@ public:
         countB+=max(0,contB-2);
         countA+=max(0,contA-2);
         return countA>countB;
+        /*
+        int a = 0, b = 0;
+        for(int i=1; i<n-1; ++i){
+            if(s[i] == s[i-1] && s[i] == s[i+1]){
+                if(s[i] == 'A') ++a;
+                else ++b;
+			}
+        }
+        return a>b;
+        */
     }
 };
