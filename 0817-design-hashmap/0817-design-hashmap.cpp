@@ -7,23 +7,43 @@ static auto _ = [](){
 
 
 class MyHashMap {
-    //int n=1000000;
-    vector<int>mp;
+    vector<list<pair<int,int>>>mp;
+    size_t sz=10000;
 public:
     MyHashMap() {
-        mp.resize(1000002,-1);
+        mp.resize(sz);
     }
     
     void put(int key, int value) {
-        mp[key]=value;
+        int index=key%sz;
+        auto &chain=mp[index];
+        for(auto &it:chain){
+            if(it.first==key){
+                it.second=value;
+                return;
+            }
+        }
+        chain.emplace_back(key,value);
     }
     
     int get(int key) {
-        return mp[key];
+        auto &chain=mp[key%sz];
+        if(chain.empty()) return -1;
+        for(auto &it:chain){
+            if(it.first==key) return it.second;
+        }
+        return -1;
     }
     
     void remove(int key) {
-        mp[key]=-1;
+        auto &chain=mp[key%sz];
+        //chain.remove_if([key](auto n) { return n.first == key; });        
+        for(auto it=chain.begin();it!=chain.end();++it){
+            if(it->first==key){
+                chain.erase(it);
+                return;
+            }
+        }
     }
 };
 
