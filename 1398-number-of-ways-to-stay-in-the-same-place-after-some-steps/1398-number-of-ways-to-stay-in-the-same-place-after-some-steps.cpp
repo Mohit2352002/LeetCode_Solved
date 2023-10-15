@@ -30,7 +30,8 @@ public:
 
 
 
-
+//bottom up
+/*
 class Solution {
 public:
     int numWays(int steps, int arrLen){
@@ -44,5 +45,24 @@ public:
             }
         }
         return dp[0][steps];
+    }
+};*/
+
+
+//space optimised dp
+class Solution {
+public:
+    int numWays(int steps, int arrLen){
+        int MOD=1e9+7;
+        arrLen=min(steps/2 +1,arrLen);
+        vector<int>dp(arrLen,0),prevdp(arrLen,0);       
+        prevdp[0]=1;
+        for(int i=1;i<=steps;++i){
+            for(int pos=0;pos<arrLen;++pos){
+                dp[pos]=((((pos==arrLen-1)?0:prevdp[pos+1])+((pos==0)?0:prevdp[pos-1]))%MOD+prevdp[pos])%MOD;
+            }
+            prevdp=dp;
+        }
+        return dp[0];
     }
 };
