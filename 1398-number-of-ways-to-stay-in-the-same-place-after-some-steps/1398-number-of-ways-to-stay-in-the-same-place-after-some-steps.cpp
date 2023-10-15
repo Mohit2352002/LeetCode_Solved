@@ -1,5 +1,4 @@
 //Top Down (Memory Limit Exceeded)
-/*
 class Solution {
     int MOD=1e9+7;
     vector<vector<int>>dp;
@@ -15,12 +14,15 @@ class Solution {
     }
 public:
     int numWays(int steps, int arrLen){
+        arrLen=min(steps,arrLen);
         dp.resize(steps+1, vector<int>(arrLen,-1));
         return helper(0,steps,arrLen);
     }
-};*/
+};
 
 
+
+/*
 class Solution {
 public:
     int numWays(int steps, int arrLen){
@@ -35,4 +37,4 @@ public:
         }
         return dp[0][steps];
     }
-};
+};*/
