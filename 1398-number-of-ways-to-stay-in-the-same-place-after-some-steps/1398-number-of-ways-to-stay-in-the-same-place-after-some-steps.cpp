@@ -67,8 +67,8 @@ public:
         return dp[0];
     }*/
     int numWays(int steps, int arrLen) {
-        int sz = min(steps / 2 + 1, arrLen);
-        vector<int> v1(sz + 2), v2(sz + 2);
+        int sz = min(steps/2 + 1, arrLen);
+        vector<int> v1(sz+2), v2(sz+2);
         v1[1] = 1;
         while (steps-- > 0) {
             for (auto i = 1; i <= sz; ++i)
