@@ -1,4 +1,5 @@
-//Top Down (Memory Limit Exceeded)
+//Top Down (Memory Limit Exceeded can be avoided by setting arrLen to min of steps and arrLen)
+/*
 class Solution {
     int MOD=1e9+7;
     vector<vector<int>>dp;
@@ -18,16 +19,16 @@ public:
         dp.resize(steps+1, vector<int>(arrLen,-1));
         return helper(0,steps,arrLen);
     }
-};
+};*/
 
 
 
-/*
+
 class Solution {
 public:
     int numWays(int steps, int arrLen){
         int MOD=1e9+7;
-        arrLen=min(steps,arrLen);
+        arrLen=min(steps/2 +1,arrLen);
         vector<vector<int>>dp(arrLen,vector<int>(steps+1,0));       
         dp[0][0]=1;
         for(int i=1;i<=steps;++i){
@@ -37,4 +38,4 @@ public:
         }
         return dp[0][steps];
     }
-};*/
+};
