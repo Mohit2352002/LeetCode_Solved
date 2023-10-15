@@ -1,3 +1,10 @@
+static auto _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return nullptr;
+}();
+
 //Top Down (Memory Limit Exceeded can be avoided by setting arrLen to min of steps and arrLen)
 /*
 class Solution {
