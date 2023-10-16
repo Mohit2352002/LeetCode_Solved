@@ -9,20 +9,20 @@ static auto _ = [](){
 class Solution {
 public:
     vector<int> getRow(int rowIndex){
-        vector<vector<int>>ans;
-        ans.push_back({1});
-        if(rowIndex==0) return {1};
-        ans.push_back({1,1});
-        if(rowIndex==1) return {1,1};
+        vector<int>currRow;
+        currRow={1};
+        if(rowIndex==0) return currRow;
+        currRow={1,1};
+        if(rowIndex==1) return currRow;
         for(int i=2; i<=rowIndex; ++i){
             vector<int>temp;
             temp.push_back(1);
             for(int j=1;j<i;++j){
-                temp.push_back((ans[i-1][j-1]+ans[i-1][j]));
+                temp.push_back((currRow[j-1]+currRow[j]));
             }
             temp.push_back(1);
-            ans.push_back(temp);
+            currRow=temp;
         }
-        return ans[rowIndex];
+        return currRow;
     }
 };
